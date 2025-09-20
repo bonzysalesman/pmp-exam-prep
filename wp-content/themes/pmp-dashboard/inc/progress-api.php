@@ -281,26 +281,56 @@ class PMP_Progress_API {
             }
         }
         
-        if ($lowest_percentage < 50) {
+        // Domain-specific recommendations
+        if ($lowest_percentage < 25) {
             $domain_name = ucfirst(str_replace('_', ' ', $lowest_domain));
-            $recommendations[] = "Focus on {$domain_name} domain - you're at {$lowest_percentage}% completion";
+            $recommendations[] = "Focus on {$domain_name} domain - you're at {$lowest_percentage}% completion. This needs immediate attention!";
+        } elseif ($lowest_percentage < 50) {
+            $domain_name = ucfirst(str_replace('_', ' ', $lowest_domain));
+            $recommendations[] = "Consider spending more time on {$domain_name} domain to balance your preparation";
         }
         
-        // Check study consistency
-        if (count($study_sessions) < 7) {
-            $recommendations[] = "Try to study more consistently - aim for daily 15-20 minute sessions";
+        // Study consistency recommendations
+        $recent_sessions = count(array_filter($study_sessions, function($session) {
+            return strtotime($session['session_date']) >= strtotime('-7 days');
+        }));
+        
+        if ($recent_sessions < 3) {
+            $recommendations[] = "Try to study more consistently - aim for at least 4-5 sessions per week";
+        } elseif ($recent_sessions >= 6) {
+            $recommendations[] = "Excellent consistency! You're studying almost daily. Keep up the great work!";
         }
         
-        // Check overall progress
-        if ($progress_data['overall_progress'] < 25) {
-            $recommendations[] = "You're just getting started! Focus on completing 2-3 lessons per day";
-        } elseif ($progress_data['overall_progress'] < 75) {
-            $recommendations[] = "Great progress! Consider taking practice tests to identify weak areas";
+        // Overall progress recommendations
+        $overall = $progress_data['overall_progress'];
+        if ($overall < 25) {
+            $recommendations[] = "You're just getting started! Focus on completing 2-3 lessons per day to build momentum";
+        } elseif ($overall < 50) {
+            $recommendations[] = "Good progress! Consider taking your first practice test to identify knowledge gaps";
+        } elseif ($overall < 75) {
+            $recommendations[] = "Great progress! Start incorporating more practice questions into your routine";
+        } elseif ($overall < 90) {
+            $recommendations[] = "Excellent progress! Focus on practice exams and review weak areas";
         } else {
-            $recommendations[] = "Excellent progress! Focus on practice exams and final review";
+            $recommendations[] = "Outstanding! You're almost ready. Take full-length practice exams and fine-tune your knowledge";
         }
         
-        return $recommendations;
+        // Time-based recommendations
+        $total_time = array_sum(array_column($study_sessions, 'duration_minutes'));
+        $avg_session = $total_time > 0 ? $total_time / count($study_sessions) : 0;
+        
+        if ($avg_session < 15) {
+            $recommendations[] = "Try to extend your study sessions to 20-30 minutes for better retention";
+        } elseif ($avg_session > 60) {
+            $recommendations[] = "Consider breaking longer sessions into smaller chunks with breaks for better focus";
+        }
+        
+        // Motivational messages
+        if (empty($recommendations)) {
+            $recommendations[] = "You're doing great! Keep maintaining your current study pace and consistency";
+        }
+        
+        return array_slice($recommendations, 0, 3); // Limit to 3 recommendations
     }
 }
 

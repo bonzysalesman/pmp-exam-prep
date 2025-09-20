@@ -362,15 +362,19 @@ class PMP_Progress_Tracker {
      */
     private static function get_streak_message($streak) {
         if ($streak === 0) {
-            return 'Start your study streak today!';
+            return 'Start your study streak today! 🚀';
         } elseif ($streak === 1) {
-            return 'Great start! Keep it going tomorrow.';
+            return 'Great start! Keep it going tomorrow. 💪';
         } elseif ($streak < 7) {
-            return "You're on a {$streak}-day streak! Keep building momentum.";
+            return "You're on a {$streak}-day streak! Keep building momentum. 🔥";
+        } elseif ($streak < 14) {
+            return "Amazing! {$streak} days in a row. You're building a strong habit. ⭐";
         } elseif ($streak < 30) {
-            return "Amazing! {$streak} days in a row. You're building a strong habit.";
+            return "Fantastic! {$streak}-day streak. You're becoming unstoppable! 🏆";
+        } elseif ($streak < 60) {
+            return "Incredible! {$streak}-day streak. You're a study champion! 👑";
         } else {
-            return "Incredible! {$streak}-day streak. You're a study champion!";
+            return "Legendary! {$streak}-day streak. You're an inspiration! 🌟";
         }
     }
     
