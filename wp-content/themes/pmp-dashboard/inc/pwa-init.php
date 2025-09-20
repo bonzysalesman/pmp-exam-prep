@@ -26,6 +26,14 @@ class PMP_PWA_Init {
             '1.0.0',
             true
         );
+        
+        wp_enqueue_script(
+            'pmp-offline-indicator',
+            get_template_directory_uri() . '/assets/js/offline-indicator.js',
+            array(),
+            '1.0.0',
+            true
+        );
     }
     
     public function add_offline_page() {
