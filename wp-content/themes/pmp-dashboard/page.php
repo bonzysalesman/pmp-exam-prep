@@ -123,8 +123,10 @@ function toggleDropdown() {
 document.addEventListener('click', function(event) {
     const dropdown = document.getElementById('accountDropdown');
     const button = event.target.closest('button');
-    if (!button || button.getAttribute('onclick') !== 'toggleDropdown()') {
-        if (dropdown) dropdown.classList.add('hidden');
+    if (!button || !button.contains(event.target)) {
+        if (dropdown && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
     }
 });
 
