@@ -34,9 +34,19 @@ function pmp_enqueue_assets() {
     ');
     
     wp_enqueue_script('pmp-dashboard', get_template_directory_uri() . '/assets/js/dashboard.js', array('jquery'), '1.0', true);
+    
+    // Chart.js for progress visualizations
+    wp_enqueue_script('chartjs', 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js', array(), '4.4.0', true);
+    
+    // Progress tracking scripts
+    wp_enqueue_script('progress-tracker', get_template_directory_uri() . '/assets/js/progress-tracker.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('analytics-charts', get_template_directory_uri() . '/assets/js/analytics-charts.js', array('chartjs'), '1.0', true);
+    
     wp_localize_script('pmp-dashboard', 'pmp_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('pmp_nonce')
+        'nonce' => wp_create_nonce('pmp_nonce'),
+        'rest_url' => rest_url('pmp/v1/'),
+        'rest_nonce' => wp_create_nonce('wp_rest')
     ));
     
     // PWA Service Worker registration
@@ -56,13 +66,88 @@ function pmp_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'pmp_enqueue_assets');
 
-// Include custom post types
-require_once get_template_directory() . '/inc/custom-post-types.php';
-
 // Include progress tracking system
 require_once get_template_directory() . '/inc/progress-database.php';
 require_once get_template_directory() . '/inc/progress-tracking.php';
 require_once get_template_directory() . '/inc/progress-api.php';
+
+// Include existing user progress functionality
+require_once get_template_directory() . '/inc/user-progress.php';
+
+// AJAX handlers for progress tracking
+add_action('wp_ajax_update_lesson_progress', 'pmp_ajax_update_lesson_progress');
+add_action('wp_ajax_get_user_progress', 'pmp_ajax_get_user_progress');
+add_action('wp_ajax_get_recent_activity', 'pmp_ajax_get_recent_activity');
+
+function pmp_ajax_update_lesson_progress() {
+    check_ajax_referer('pmp_nonce', 'nonce');
+    
+    $lesson_id = intval($_POST['lesson_id']);
+    $status = sanitize_text_field($_POST['status']);
+    $progress_percentage = floatval($_POST['progress_percentage']);
+    $time_spent = intval($_POST['time_spent']);
+    
+    $user_id = get_current_user_id();
+    
+    $result = PMP_Progress_Tracker::update_lesson_progress(
+        $user_id, 
+        $lesson_id, 
+        $status, 
+        $progress_percentage, 
+        $time_spent
+    );
+    
+    if (is_wp_error($result)) {
+        wp_send_json_error($result->get_error_message());
+    } else {
+        wp_send_json_success([
+            'message' => 'Progress updated successfully',
+            'result' => $result
+        ]);
+    }
+}
+
+function pmp_ajax_get_user_progress() {
+    check_ajax_referer('pmp_nonce', 'nonce');
+    
+    $user_id = get_current_user_id();
+    $progress = PMP_Progress_Tracker::get_user_progress($user_id);
+    
+    wp_send_json_success($progress);
+}
+
+function pmp_ajax_get_recent_activity() {
+    check_ajax_referer('pmp_nonce', 'nonce');
+    
+    $user_id = get_current_user_id();
+    
+    global $wpdb;
+    
+    // Get recent lesson completions
+    $recent_lessons = $wpdb->get_results($wpdb->prepare("
+        SELECT lp.*, p.post_title, p.post_date
+        FROM {$wpdb->prefix}pmp_lesson_progress lp
+        JOIN {$wpdb->prefix}posts p ON lp.lesson_id = p.ID
+        WHERE lp.user_id = %d 
+        AND lp.status = 'completed'
+        ORDER BY lp.completed_at DESC
+        LIMIT 5
+    ", $user_id));
+    
+    $activities = [];
+    
+    foreach ($recent_lessons as $lesson) {
+        $activities[] = [
+            'type' => 'lesson_completed',
+            'title' => $lesson->post_title,
+            'date' => $lesson->completed_at,
+            'icon' => 'fas fa-check-circle',
+            'color' => 'text-green-600'
+        ];
+    }
+    
+    wp_send_json_success($activities);
+}
 require_once get_template_directory() . '/inc/user-progress.php';
 require_once get_template_directory() . '/inc/ajax-handlers.php';
 
