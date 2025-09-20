@@ -90,6 +90,30 @@ get_header();
 	</main><!-- #main -->
 </div><!-- .bg-white -->
 
+<!-- CTA Section -->
+<section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold mb-4">Ready to Pass Your PMP Exam?</h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            Join thousands of successful PMP candidates who chose our proven study system.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <?php if (is_user_logged_in()) : ?>
+                <a href="<?php echo get_permalink(get_page_by_path('dashboard')); ?>" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors duration-300">
+                    Go to Dashboard
+                </a>
+            <?php else : ?>
+                <a href="<?php echo wp_registration_url(); ?>" class="bg-white text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors duration-300">
+                    Start Free Trial
+                </a>
+                <a href="<?php echo wp_login_url(); ?>" class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-primary transition-colors duration-300">
+                    Login
+                </a>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
 <script>
 function toggleDropdown() {
     document.getElementById('accountDropdown').classList.toggle('hidden');
@@ -99,13 +123,24 @@ function toggleDropdown() {
 document.addEventListener('click', function(event) {
     const dropdown = document.getElementById('accountDropdown');
     const button = event.target.closest('button');
-    if (!button || !button.contains(event.target)) {
-        if (dropdown && !dropdown.contains(event.target)) {
-            dropdown.classList.add('hidden');
-        }
+    if (!button || button.getAttribute('onclick') !== 'toggleDropdown()') {
+        if (dropdown) dropdown.classList.add('hidden');
     }
+});
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });
 </script>
 
-<?php
-get_footer();
+<?php get_footer(); ?>
