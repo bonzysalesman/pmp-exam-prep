@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="md:col-span-2">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/mohlomi_institute_logo.png" alt="Mohlomi Institute" class="h-10 mb-4">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/mohlomi_institute_logo.png" alt="Mohlomi Institute" class="h-10 mb-4 max-w-60">
                     <p class="text-gray-600 mb-4">Mohlomi Institute provides focused, practical, and ethical training solutions for project management professionals worldwide.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-primary transition-colors">
