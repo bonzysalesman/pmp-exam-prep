@@ -29,11 +29,30 @@ class PMP_Progress_Tracker {
             return new WP_Error('invalid_status', 'Invalid lesson status');
         }
         
+        if ($progress_percentage < 0 || $progress_percentage > 100) {
+            return new WP_Error('invalid_percentage', 'Progress percentage must be between 0 and 100');
+        }
+        
+        // Verify lesson exists
+        $lesson = get_post($lesson_id);
+        if (!$lesson || $lesson->post_type !== 'lesson' || $lesson->post_status !== 'publish') {
+            return new WP_Error('lesson_not_found', 'Lesson not found or not published');
+        }
+        
         // Get lesson domain
         $lesson_domain = get_post_meta($lesson_id, 'pmp_domain', true);
         if (!$lesson_domain) {
             $lesson_domain = 'process'; // Default domain
         }
+        
+        // Get existing progress to calculate time increment
+        $existing_progress = $wpdb->get_row($wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}pmp_lesson_progress WHERE user_id = %d AND lesson_id = %d",
+            $user_id, $lesson_id
+        ));
+        
+        $attempts = $existing_progress ? $existing_progress->attempts + 1 : 1;
+        $total_time = $existing_progress ? $existing_progress->time_spent_minutes + $time_spent : $time_spent;
         
         // Update lesson progress
         $completed_at = ($status === 'completed') ? current_time('mysql') : null;
@@ -45,12 +64,9 @@ class PMP_Progress_Tracker {
                 'lesson_id' => $lesson_id,
                 'status' => $status,
                 'progress_percentage' => $progress_percentage,
-                'time_spent_minutes' => $time_spent,
+                'time_spent_minutes' => $total_time,
                 'completed_at' => $completed_at,
-                'attempts' => $wpdb->get_var($wpdb->prepare(
-                    "SELECT attempts + 1 FROM {$wpdb->prefix}pmp_lesson_progress WHERE user_id = %d AND lesson_id = %d",
-                    $user_id, $lesson_id
-                )) ?: 1
+                'attempts' => $attempts
             ],
             ['%d', '%d', '%s', '%f', '%d', '%s', '%d']
         );
@@ -59,11 +75,17 @@ class PMP_Progress_Tracker {
         self::recalculate_domain_progress($user_id, $lesson_domain);
         
         // Update study session if lesson completed
-        if ($status === 'completed') {
+        if ($status === 'completed' && $time_spent > 0) {
             self::update_study_session($user_id, $lesson_domain, $time_spent);
         }
         
-        return true;
+        return [
+            'lesson_id' => $lesson_id,
+            'status' => $status,
+            'domain' => $lesson_domain,
+            'progress_percentage' => $progress_percentage,
+            'time_spent' => $total_time
+        ];
     }
     
     /**

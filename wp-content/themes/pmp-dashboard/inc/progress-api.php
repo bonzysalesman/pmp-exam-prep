@@ -126,12 +126,6 @@ class PMP_Progress_API {
         
         $user_id = get_current_user_id();
         
-        // Verify lesson exists
-        $lesson = get_post($lesson_id);
-        if (!$lesson || $lesson->post_type !== 'lesson') {
-            return new WP_Error('lesson_not_found', 'Lesson not found', ['status' => 404]);
-        }
-        
         $result = PMP_Progress_Tracker::update_lesson_progress(
             $user_id, 
             $lesson_id, 
@@ -145,7 +139,7 @@ class PMP_Progress_API {
         }
         
         // Get updated progress for the lesson's domain
-        $lesson_domain = get_post_meta($lesson_id, 'pmp_domain', true) ?: 'process';
+        $lesson_domain = $result['domain'];
         $updated_progress = PMP_Progress_Tracker::get_user_progress($user_id);
         
         return rest_ensure_response([
@@ -241,6 +235,10 @@ class PMP_Progress_API {
      * Check permissions for reading progress data
      */
     public function check_progress_permissions($request) {
+        if (!is_user_logged_in()) {
+            return false;
+        }
+        
         $user_id = $request->get_param('user_id');
         $current_user_id = get_current_user_id();
         
@@ -252,7 +250,17 @@ class PMP_Progress_API {
      * Check permissions for updating progress
      */
     public function check_update_permissions($request) {
-        return is_user_logged_in();
+        if (!is_user_logged_in()) {
+            return false;
+        }
+        
+        // Verify nonce for security
+        $nonce = $request->get_header('X-WP-Nonce');
+        if (!$nonce || !wp_verify_nonce($nonce, 'wp_rest')) {
+            return new WP_Error('invalid_nonce', 'Invalid security token', ['status' => 403]);
+        }
+        
+        return true;
     }
     
     /**
