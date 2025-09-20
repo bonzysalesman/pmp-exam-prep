@@ -162,9 +162,9 @@ function pmp_hide_admin_bar() {
 }
 add_action('after_setup_theme', 'pmp_hide_admin_bar');
 
-// Redirect all users away from wp-admin
+// Redirect non-admin users away from wp-admin
 function pmp_redirect_from_admin() {
-    if (is_admin() && !wp_doing_ajax()) {
+    if (is_admin() && !wp_doing_ajax() && !current_user_can('manage_options')) {
         wp_redirect(get_permalink(get_page_by_path('dashboard')));
         exit;
     }
