@@ -186,3 +186,20 @@ function pmp_redirect_from_admin() {
 }
 add_action('admin_init', 'pmp_redirect_from_admin');
 ?>
+// Include content management system
+require_once get_template_directory() . '/inc/content-management/database-setup.php';
+require_once get_template_directory() . '/inc/content-management/post-types.php';
+require_once get_template_directory() . '/inc/content-management/taxonomies.php';
+require_once get_template_directory() . '/inc/content-management/content-manager.php';
+require_once get_template_directory() . '/inc/content-management/sequence-manager.php';
+require_once get_template_directory() . '/inc/content-management/search-engine.php';
+
+// Update theme activation to include content management setup
+function pmp_content_activation() {
+    // Create content management tables
+    PMP_Content_Database::create_tables();
+    
+    // Flush rewrite rules for new post types
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'pmp_content_activation');
