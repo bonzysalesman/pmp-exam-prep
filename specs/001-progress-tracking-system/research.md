@@ -3,200 +3,162 @@
 **Date**: September 20, 2025  
 **Feature**: 001-progress-tracking-system
 
-## Database Design Research
+## Chart.js Integration Patterns for WordPress
 
-### Current Schema Analysis
-```sql
--- Existing table structure
-wp_user_lesson_progress (
-    id BIGINT PRIMARY KEY,
-    user_id BIGINT,
-    lesson_id BIGINT,
-    status ENUM('not_started','in_progress','completed'),
-    progress_percentage TINYINT,
-    time_spent INT,
-    started_at DATETIME,
-    completed_at DATETIME,
-    last_accessed DATETIME
-)
+### Decision: Chart.js 4.x with WordPress Enqueue System
+**Rationale**: 
+- Chart.js 4.x provides excellent responsive charts with accessibility features
+- WordPress wp_enqueue_script() ensures proper dependency management
+- CDN delivery for performance with local fallback
+
+**Implementation Pattern**:
+```php
+// In functions.php or theme file
+wp_enqueue_script('chartjs', 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js', array(), '4.4.0', true);
+wp_enqueue_script('progress-charts', get_template_directory_uri() . '/assets/js/analytics-charts.js', array('chartjs'), '1.0', true);
 ```
 
-### Recommended Enhancements
+**Alternatives Considered**:
+- Google Charts: Rejected due to privacy concerns and external dependency
+- D3.js: Rejected due to complexity and learning curve
+- Canvas native: Rejected due to accessibility and maintenance overhead
+
+## WordPress Custom Table Best Practices
+
+### Decision: Custom Tables with Proper Indexing
+**Rationale**:
+- WordPress meta tables become slow with large datasets (>10k records)
+- Custom tables allow proper indexing for <200ms query performance
+- Direct SQL queries for analytics calculations
+
+**Table Design Pattern**:
 ```sql
--- Add domain tracking
-ALTER TABLE wp_user_lesson_progress 
-ADD COLUMN domain_type ENUM('people', 'process', 'business') AFTER lesson_id;
-
--- Add performance indexes
-CREATE INDEX idx_user_domain_status ON wp_user_lesson_progress (user_id, domain_type, status);
-CREATE INDEX idx_user_completion ON wp_user_lesson_progress (user_id, completed_at);
-CREATE INDEX idx_domain_progress ON wp_user_lesson_progress (domain_type, progress_percentage);
-
--- New study sessions table
-CREATE TABLE wp_study_sessions (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
-    session_date DATE NOT NULL,
-    duration INT UNSIGNED DEFAULT 0,
-    lessons_completed TINYINT DEFAULT 0,
-    domain_focus ENUM('people', 'process', 'business', 'mixed'),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE KEY unique_user_date (user_id, session_date),
-    INDEX idx_user_sessions (user_id, session_date),
-    INDEX idx_session_duration (session_date, duration)
-);
+CREATE TABLE wp_user_progress (
+    id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    user_id bigint(20) UNSIGNED NOT NULL,
+    domain varchar(50) NOT NULL,
+    completion_percentage decimal(5,2) DEFAULT 0.00,
+    lessons_completed int(11) DEFAULT 0,
+    total_lessons int(11) DEFAULT 0,
+    last_updated datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY unique_user_domain (user_id, domain),
+    KEY idx_user_id (user_id),
+    KEY idx_domain (domain)
+) ENGINE=InnoDB;
 ```
 
-### Query Performance Analysis
-- **Current bottleneck**: No domain-specific indexing
-- **Optimization target**: < 100ms for progress calculations
-- **Caching strategy**: WordPress transients for 15-minute cache
-- **Batch processing**: Group updates for concurrent users
+**Alternatives Considered**:
+- WordPress meta tables: Rejected due to performance at scale
+- JSON fields: Rejected due to limited query capabilities
+- External database: Rejected due to complexity and WordPress integration
 
-## Progress Visualization Research
+## Real-time Progress Update Strategies
 
-### SVG Animation Performance
+### Decision: WordPress REST API with AJAX
+**Rationale**:
+- WordPress REST API provides standardized endpoints with authentication
+- AJAX allows real-time updates without page refresh
+- Nonce validation ensures security
+
+**Update Pattern**:
 ```javascript
-// Optimized progress circle animation
-const animateProgress = (element, targetPercentage) => {
-    const circumference = 2 * Math.PI * 45; // radius = 45
-    const offset = circumference - (targetPercentage / 100) * circumference;
-    
-    element.style.strokeDasharray = circumference;
-    element.style.strokeDashoffset = offset;
-    element.style.transition = 'stroke-dashoffset 0.5s ease-in-out';
+// Frontend update
+fetch('/wp-json/pmp/v1/progress/lesson', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-WP-Nonce': pmp_ajax.nonce
+    },
+    body: JSON.stringify({
+        lesson_id: lessonId,
+        time_spent: timeSpent
+    })
+});
+```
+
+**Alternatives Considered**:
+- WordPress AJAX hooks: Rejected due to less standardized approach
+- WebSockets: Rejected due to server complexity and hosting requirements
+- Server-sent events: Rejected due to limited browser support
+
+## PWA Offline Storage Strategies
+
+### Decision: IndexedDB with Service Worker Caching
+**Rationale**:
+- IndexedDB provides structured storage for progress data
+- Service Worker enables offline functionality
+- Sync when connection restored
+
+**Storage Pattern**:
+```javascript
+// Store progress offline
+const request = indexedDB.open('pmp-progress', 1);
+request.onsuccess = function(event) {
+    const db = event.target.result;
+    const transaction = db.transaction(['progress'], 'readwrite');
+    const store = transaction.objectStore('progress');
+    store.put({
+        user_id: userId,
+        lesson_id: lessonId,
+        completed_at: new Date(),
+        synced: false
+    });
 };
 ```
 
-### Mobile Performance Considerations
-- **CSS transforms**: Use `transform3d` for hardware acceleration
-- **Animation timing**: Limit to 60fps with `requestAnimationFrame`
-- **Memory usage**: Cleanup event listeners on component unmount
-- **Battery impact**: Pause animations when tab not visible
+**Alternatives Considered**:
+- LocalStorage: Rejected due to 5MB limit and synchronous API
+- WebSQL: Rejected due to deprecation
+- Cache API only: Rejected due to limited structured data support
 
-## Domain Progress Calculation
+## Performance Optimization Strategies
 
-### PMI ECO Alignment
-```php
-// Domain weight distribution
-const DOMAIN_WEIGHTS = [
-    'people' => 0.42,      // 42% of exam content
-    'process' => 0.50,     // 50% of exam content  
-    'business' => 0.08     // 8% of exam content
-];
+### Decision: Database Indexing + Query Optimization
+**Rationale**:
+- Proper indexing ensures <200ms query response
+- Aggregate tables for complex analytics
+- Caching for frequently accessed data
 
-// Weighted progress calculation
-function calculateOverallProgress($user_id) {
-    $domain_progress = [];
-    foreach (DOMAIN_WEIGHTS as $domain => $weight) {
-        $completed = get_domain_completed_lessons($user_id, $domain);
-        $total = get_domain_total_lessons($domain);
-        $domain_progress[$domain] = ($completed / $total) * 100;
-    }
-    
-    return array_sum(array_map(function($domain, $weight) use ($domain_progress) {
-        return $domain_progress[$domain] * $weight;
-    }, array_keys(DOMAIN_WEIGHTS), DOMAIN_WEIGHTS));
-}
-```
-
-## Study Streak Algorithm
-
-### Streak Calculation Logic
-```php
-function calculateStudyStreak($user_id) {
-    $sessions = get_user_study_sessions($user_id, 'DESC');
-    $streak = 0;
-    $current_date = new DateTime();
-    
-    foreach ($sessions as $session) {
-        $session_date = new DateTime($session->session_date);
-        $expected_date = clone $current_date;
-        $expected_date->sub(new DateInterval('P' . $streak . 'D'));
-        
-        if ($session_date->format('Y-m-d') === $expected_date->format('Y-m-d')) {
-            $streak++;
-        } else {
-            break;
-        }
-    }
-    
-    return $streak;
-}
-```
-
-### Motivation Thresholds
-- **3 days**: "Building momentum!" 🔥
-- **7 days**: "One week strong!" ⭐
-- **14 days**: "Two weeks of dedication!" 🏆
-- **30 days**: "Monthly master!" 👑
-
-## Real-time Updates Architecture
-
-### WebSocket Alternative (Server-Sent Events)
-```php
-// Lightweight real-time updates
-header('Content-Type: text/event-stream');
-header('Cache-Control: no-cache');
-
-while (true) {
-    $progress_data = get_user_progress_updates($user_id);
-    if ($progress_data) {
-        echo "data: " . json_encode($progress_data) . "\n\n";
-    }
-    sleep(5); // Check every 5 seconds
-}
-```
-
-### AJAX Polling Strategy
-- **Update frequency**: Every 30 seconds for active users
-- **Batch updates**: Group multiple progress changes
-- **Error handling**: Exponential backoff on failures
-- **Offline support**: Queue updates for sync when online
-
-## Performance Benchmarks
-
-### Target Metrics
-- **Progress update**: < 500ms (database write + cache invalidation)
-- **Dashboard load**: < 2s (including all progress calculations)
-- **Concurrent users**: 10,000+ without performance degradation
-- **Memory usage**: < 50MB per user session
-
-### Optimization Strategies
-1. **Database**: Proper indexing, query optimization
-2. **Caching**: WordPress transients, object caching
-3. **Frontend**: Lazy loading, component virtualization
-4. **CDN**: Static asset optimization, image compression
+**Optimization Techniques**:
+1. Composite indexes on (user_id, domain) for progress queries
+2. Separate analytics table with pre-calculated aggregates
+3. WordPress transient caching for dashboard data (5-minute TTL)
+4. Pagination for large datasets
 
 ## Security Considerations
 
-### Data Protection
-- **Input validation**: Sanitize all progress data inputs
-- **SQL injection**: Use prepared statements exclusively
-- **XSS prevention**: Escape all output data
-- **CSRF protection**: WordPress nonces for all AJAX requests
+### Decision: WordPress Nonces + Capability Checks
+**Rationale**:
+- WordPress nonces prevent CSRF attacks
+- Capability checks ensure proper authorization
+- Data sanitization prevents SQL injection
 
-### GDPR Compliance
-- **Data minimization**: Store only necessary progress data
-- **Right to erasure**: Implement progress data deletion
-- **Data portability**: Export progress in standard format
-- **Consent tracking**: Log user consent for progress tracking
-
-## Integration Points
-
-### WordPress Hooks
+**Security Pattern**:
 ```php
-// Progress update hooks
-do_action('pmp_progress_updated', $user_id, $lesson_id, $progress_data);
-add_filter('pmp_progress_calculation', $callback, 10, 2);
+// API endpoint security
+if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'pmp_progress_update')) {
+    wp_die('Security check failed');
+}
 
-// Dashboard integration
-add_action('pmp_dashboard_widgets', 'render_progress_widget');
-add_filter('pmp_dashboard_data', 'include_progress_data');
+if (!current_user_can('read')) {
+    wp_die('Insufficient permissions');
+}
+
+$user_id = absint($_POST['user_id']);
+$lesson_id = sanitize_text_field($_POST['lesson_id']);
 ```
 
-### Third-party Integrations
-- **Analytics**: Google Analytics events for progress milestones
-- **Email**: Mailchimp triggers for streak achievements
-- **LMS**: Sensei LMS progress synchronization
-- **Mobile**: PWA progress sync for offline usage
+## Accessibility Requirements
+
+### Decision: WCAG 2.1 AA Compliance
+**Rationale**:
+- Screen reader compatibility for progress data
+- Keyboard navigation for all interactive elements
+- High contrast colors for visual indicators
+
+**Implementation Requirements**:
+- ARIA labels for progress bars and charts
+- Alt text for visual progress indicators
+- Keyboard-accessible chart interactions
+- Focus management for dynamic updates

@@ -1,0 +1,347 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PMP Progress Tracking API",
+    "version": "1.0.0",
+    "description": "REST API for tracking user progress in PMP exam preparation"
+  },
+  "servers": [
+    {
+      "url": "/wp-json/pmp/v1",
+      "description": "WordPress REST API namespace"
+    }
+  ],
+  "paths": {
+    "/progress/{user_id}": {
+      "get": {
+        "summary": "Get user progress summary",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User progress data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressSummary"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Insufficient permissions"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/progress/lesson": {
+      "post": {
+        "summary": "Update lesson progress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LessonUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Progress updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "403": {
+            "description": "Insufficient permissions"
+          }
+        }
+      }
+    },
+    "/analytics/{user_id}": {
+      "get": {
+        "summary": "Get user analytics data",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["week", "month", "all"],
+              "default": "month"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analytics data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyticsData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/streak/{user_id}": {
+      "get": {
+        "summary": "Get user study streak information",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Study streak data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreakData"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProgressSummary": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "integer"
+          },
+          "overall_progress": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "domains": {
+            "type": "object",
+            "properties": {
+              "people": {
+                "$ref": "#/components/schemas/DomainProgress"
+              },
+              "process": {
+                "$ref": "#/components/schemas/DomainProgress"
+              },
+              "business_environment": {
+                "$ref": "#/components/schemas/DomainProgress"
+              }
+            }
+          },
+          "total_lessons_completed": {
+            "type": "integer"
+          },
+          "total_study_time_minutes": {
+            "type": "integer"
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DomainProgress": {
+        "type": "object",
+        "properties": {
+          "completion_percentage": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "lessons_completed": {
+            "type": "integer"
+          },
+          "total_lessons": {
+            "type": "integer"
+          },
+          "time_spent_minutes": {
+            "type": "integer"
+          }
+        }
+      },
+      "LessonUpdate": {
+        "type": "object",
+        "required": ["lesson_id", "status"],
+        "properties": {
+          "lesson_id": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["not_started", "in_progress", "completed"]
+          },
+          "progress_percentage": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "time_spent_minutes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "UpdateResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "updated_progress": {
+            "$ref": "#/components/schemas/DomainProgress"
+          }
+        }
+      },
+      "AnalyticsData": {
+        "type": "object",
+        "properties": {
+          "study_sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StudySession"
+            }
+          },
+          "weekly_progress": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "week": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "lessons_completed": {
+                  "type": "integer"
+                },
+                "time_spent": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "domain_breakdown": {
+            "type": "object",
+            "properties": {
+              "people": {
+                "type": "number"
+              },
+              "process": {
+                "type": "number"
+              },
+              "business_environment": {
+                "type": "number"
+              }
+            }
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "StudySession": {
+        "type": "object",
+        "properties": {
+          "session_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "duration_minutes": {
+            "type": "integer"
+          },
+          "lessons_completed": {
+            "type": "integer"
+          },
+          "domain_focus": {
+            "type": "string"
+          }
+        }
+      },
+      "StreakData": {
+        "type": "object",
+        "properties": {
+          "current_streak": {
+            "type": "integer"
+          },
+          "longest_streak": {
+            "type": "integer"
+          },
+          "last_study_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "total_study_days": {
+            "type": "integer"
+          },
+          "streak_message": {
+            "type": "string"
+          },
+          "next_milestone": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "WordPressNonce": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-WP-Nonce"
+      }
+    }
+  },
+  "security": [
+    {
+      "WordPressNonce": []
+    }
+  ]
+}

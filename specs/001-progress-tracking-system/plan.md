@@ -1,134 +1,163 @@
+---
+description: "Implementation plan for enhanced progress tracking system"
+scripts:
+  sh: scripts/bash/update-agent-context.sh CLAUDE
+  ps: scripts/powershell/update-agent-context.ps1 -AgentType CLAUDE
+---
+
 # Implementation Plan: Enhanced Progress Tracking System
 
 **Branch**: `001-progress-tracking-system` | **Date**: September 20, 2025 | **Spec**: [spec.md](./spec.md)
 **Input**: Feature specification from `/specs/001-progress-tracking-system/spec.md`
 
 ## Summary
-Implement comprehensive progress tracking with domain-specific analytics (People 42%, Process 50%, Business Environment 8%), study streak tracking, and performance insights using WordPress custom tables with optimized queries and animated SVG progress visualizations.
+Implement comprehensive progress tracking with domain-specific analytics (People 42%, Process 50%, Business Environment 8%), study streaks, and performance insights. Technical approach: WordPress custom tables for progress data, REST API endpoints for real-time updates, and responsive dashboard components with Tailwind CSS.
 
 ## Technical Context
-**Language/Version**: PHP 8.1+, JavaScript ES2020  
-**Primary Dependencies**: WordPress 6.4+, MySQL 8.0+, Tailwind CSS (built)  
-**Storage**: Custom WordPress tables with proper indexing  
-**Testing**: PHPUnit for backend, Jest for frontend  
-**Target Platform**: Web application (mobile-responsive)  
-**Project Type**: web (WordPress theme enhancement)  
-**Performance Goals**: < 500ms progress updates, < 2s dashboard load  
-**Constraints**: GDPR compliance, 10k+ concurrent users  
-**Scale/Scope**: 100k+ lesson completions, real-time analytics
+**Language/Version**: PHP 8.1+, JavaScript ES2020+  
+**Primary Dependencies**: WordPress 6.4+, Tailwind CSS, Chart.js for visualizations  
+**Storage**: MySQL 8.0+ with custom tables for progress tracking  
+**Testing**: PHPUnit for backend, Jest for frontend JavaScript  
+**Target Platform**: WordPress web application, mobile-responsive  
+**Project Type**: web (WordPress theme with backend + frontend components)  
+**Performance Goals**: <200ms API response time, <3s page load  
+**Constraints**: WCAG 2.1 AA compliance, offline-capable PWA features  
+**Scale/Scope**: 10,000+ users, real-time progress updates, 91 lessons tracking
 
 ## Constitution Check
+*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-### Educational Excellence ✅
-- **Learning-First Design**: Progress tracking directly improves learning outcomes by identifying knowledge gaps
-- **PMI Standards Compliance**: Domain percentages align with PMI ECO structure
-- **Progressive Mastery**: Tracks incremental progress across 13-week program
-- **Multi-Modal Learning**: Visual progress indicators support different learning styles
-
-### Technical Standards ✅
-- **Performance**: < 500ms updates, < 2s dashboard load meets requirements
-- **Accessibility**: SVG progress circles with ARIA labels, keyboard navigation
-- **Security**: User progress data properly sanitized and validated
-- **Scalability**: Database design supports 10k+ concurrent users
-
-### Code Quality ✅
-- **WordPress Standards**: Uses WordPress hooks, custom tables, and coding standards
-- **Minimal Dependencies**: Leverages existing WordPress infrastructure
-- **Database Efficiency**: Proper indexing strategy for progress queries
-- **Error Handling**: Graceful fallbacks for failed progress updates
+✅ **Educational Excellence**: Domain-specific tracking aligns with PMI ECO structure  
+✅ **Performance**: Custom tables with proper indexing for <200ms queries  
+✅ **Accessibility**: Progress visualizations include text alternatives and keyboard navigation  
+✅ **Security**: User progress data protected with WordPress nonces and capability checks  
+✅ **WordPress Standards**: Using custom post types and WordPress hooks/filters  
+✅ **Mobile-First**: Responsive progress cards and touch-friendly interactions
 
 ## Project Structure
 
 ### Documentation (this feature)
 ```
 specs/001-progress-tracking-system/
-├── plan.md              # This file
-├── research.md          # Technical research and decisions
-├── data-model.md        # Database schema and relationships
-├── quickstart.md        # Testing and validation guide
-├── contracts/           # API contracts and interfaces
-└── tasks.md             # Implementation tasks (created by /tasks)
+├── plan.md              # This file (/plan command output)
+├── research.md          # Phase 0 output (/plan command)
+├── data-model.md        # Phase 1 output (/plan command)
+├── quickstart.md        # Phase 1 output (/plan command)
+├── contracts/           # Phase 1 output (/plan command)
+└── tasks.md             # Phase 2 output (/tasks command - NOT created by /plan)
 ```
 
 ### Source Code (repository root)
 ```
 wp-content/themes/pmp-dashboard/
-├── includes/
-│   ├── class-pmp-progress-tracker.php      # Core progress tracking
-│   ├── class-pmp-domain-analytics.php      # Domain-specific calculations
-│   ├── class-pmp-study-streaks.php         # Streak tracking logic
-│   └── class-pmp-progress-api.php          # AJAX endpoints
-├── assets/
-│   ├── js/
-│   │   ├── progress-tracker.js             # Frontend progress updates
-│   │   └── progress-visualizations.js      # SVG animations
-│   └── css/
-│       └── progress-components.css         # Progress UI styles
-├── template-parts/
-│   ├── dashboard/
-│   │   ├── progress-overview.php           # Main progress display
-│   │   ├── domain-breakdown.php            # Domain-specific progress
-│   │   └── study-streak-widget.php         # Streak display
-│   └── progress/
-│       ├── circular-progress.php           # Animated progress circles
-│       └── progress-recommendations.php    # Study suggestions
-└── database/
-    └── progress-schema.sql                 # Database table definitions
+├── inc/
+│   ├── progress-tracking.php    # Main progress tracking class
+│   ├── progress-api.php         # REST API endpoints
+│   └── progress-widgets.php     # Dashboard widgets
+├── template-parts/dashboard/
+│   ├── progress-cards.php       # Domain progress cards
+│   ├── study-streak.php         # Study streak display
+│   └── analytics-charts.php     # Progress visualizations
+├── assets/js/
+│   ├── progress-tracker.js      # Frontend progress updates
+│   └── analytics-charts.js      # Chart.js implementations
+└── assets/css/
+    └── progress-components.css  # Progress-specific styles
 ```
 
-## Phase 0: Research & Analysis
+**Structure Decision**: Option 2 (Web application) - WordPress theme with backend PHP classes and frontend JavaScript components
 
-### Database Design Research
-- Analyze current `wp_user_lesson_progress` table structure
-- Research optimal indexing strategies for progress queries
-- Investigate WordPress transient caching for performance
-- Study GDPR compliance requirements for progress data
+## Phase 0: Outline & Research
+1. **Extract unknowns from Technical Context**:
+   - Chart.js integration patterns for WordPress themes
+   - WordPress custom table best practices for progress data
+   - Real-time progress update strategies (AJAX vs REST API)
+   - PWA offline storage for progress data
 
-### Performance Research  
-- Benchmark current progress update performance
-- Research SVG animation performance on mobile devices
-- Analyze database query optimization techniques
-- Study real-time update patterns for concurrent users
+2. **Generate and dispatch research agents**:
+   ```
+   Task: "Research Chart.js integration patterns for WordPress themes"
+   Task: "Find best practices for WordPress custom tables with proper indexing"
+   Task: "Research real-time progress update patterns in WordPress"
+   Task: "Find PWA offline storage strategies for user progress data"
+   ```
 
-### UI/UX Research
-- Research effective progress visualization patterns
-- Study motivational design principles for learning platforms
-- Analyze accessibility requirements for progress indicators
-- Research mobile-first progress display patterns
+3. **Consolidate findings** in `research.md`
 
-## Phase 1: Core Design
+**Output**: research.md with all technical decisions documented
 
-### Database Schema Enhancement
-- Extend existing progress tables with domain tracking
-- Add study session tracking table
-- Implement proper foreign key relationships
-- Create optimized indexes for common queries
+## Phase 1: Design & Contracts
+*Prerequisites: research.md complete*
 
-### API Contract Design
-- Define AJAX endpoints for progress updates
-- Specify real-time progress sync protocols
-- Design batch update mechanisms for performance
-- Create progress export/import interfaces
+1. **Extract entities from feature spec** → `data-model.md`:
+   - UserProgress (user_id, domain, completion_percentage, last_updated)
+   - StudySession (user_id, session_date, duration, lessons_completed)
+   - LessonProgress (user_id, lesson_id, completed_at, time_spent)
+   - StudyStreak (user_id, current_streak, longest_streak, last_study_date)
 
-### Component Architecture
-- Design modular progress tracking classes
-- Create reusable progress visualization components
-- Implement caching strategy for expensive calculations
-- Design plugin-style architecture for extensibility
+2. **Generate API contracts** from functional requirements:
+   - GET /wp-json/pmp/v1/progress/{user_id} - Get user progress summary
+   - POST /wp-json/pmp/v1/progress/lesson - Update lesson completion
+   - GET /wp-json/pmp/v1/analytics/{user_id} - Get analytics data
+   - GET /wp-json/pmp/v1/streak/{user_id} - Get study streak info
 
-## Phase 2: Task Generation Approach
-The `/tasks` command will analyze this plan and create detailed implementation tasks covering:
+3. **Generate contract tests** from contracts:
+   - Test progress API endpoints with valid/invalid data
+   - Test authentication and authorization
+   - Test data validation and error responses
 
-1. **Database Migration Tasks**: Schema updates, index creation, data migration
-2. **Backend Development Tasks**: PHP classes, AJAX handlers, caching implementation
-3. **Frontend Development Tasks**: JavaScript components, SVG animations, responsive design
-4. **Integration Tasks**: WordPress hooks, theme integration, admin interfaces
-5. **Testing Tasks**: Unit tests, integration tests, performance benchmarks
-6. **Documentation Tasks**: Code documentation, user guides, admin documentation
+4. **Extract test scenarios** from user stories:
+   - Domain progress visualization test
+   - Study streak calculation test
+   - Progress update real-time test
+   - Analytics recommendation test
 
-Each task will include:
-- Specific acceptance criteria
-- Estimated effort (hours)
-- Dependencies on other tasks
-- Testing requirements
-- Performance benchmarks
+5. **Update agent file incrementally**:
+   - Add WordPress progress tracking context
+   - Include Chart.js and analytics patterns
+   - Update with current progress tracking implementation
+
+**Output**: data-model.md, /contracts/*, failing tests, quickstart.md, CLAUDE.md
+
+## Phase 2: Task Planning Approach
+*This section describes what the /tasks command will do - DO NOT execute during /plan*
+
+**Task Generation Strategy**:
+- Database setup tasks (custom tables, indexes)
+- API endpoint implementation tasks (one per contract)
+- Frontend component tasks (progress cards, charts, streak display)
+- Integration tasks (WordPress hooks, AJAX handlers)
+- Testing tasks (unit tests, integration tests)
+
+**Ordering Strategy**:
+1. Database schema and migration [P]
+2. Core progress tracking class [P]
+3. API endpoints (depends on core class)
+4. Frontend components (depends on API)
+5. Dashboard integration (depends on components)
+6. Testing and validation
+
+**Estimated Output**: 20-25 numbered, ordered tasks in tasks.md
+
+## Complexity Tracking
+*No constitutional violations identified*
+
+## Progress Tracking
+*This checklist is updated during execution flow*
+
+**Phase Status**:
+- [x] Phase 0: Research complete (/plan command)
+- [x] Phase 1: Design complete (/plan command)
+- [x] Phase 2: Task planning complete (/plan command - describe approach only)
+- [ ] Phase 3: Tasks generated (/tasks command)
+- [ ] Phase 4: Implementation complete
+- [ ] Phase 5: Validation passed
+
+**Gate Status**:
+- [x] Initial Constitution Check: PASS
+- [x] Post-Design Constitution Check: PASS
+- [x] All NEEDS CLARIFICATION resolved
+- [x] Complexity deviations documented (none)
+
+---
+*Based on Constitution v1.0 - See `/memory/constitution.md`*
