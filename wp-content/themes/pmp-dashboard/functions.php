@@ -185,7 +185,7 @@ function pmp_redirect_from_admin() {
     }
 }
 add_action('admin_init', 'pmp_redirect_from_admin');
-?>
+
 // Include content management system
 require_once get_template_directory() . '/inc/content-management/database-setup.php';
 require_once get_template_directory() . '/inc/content-management/post-types.php';
