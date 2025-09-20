@@ -194,6 +194,7 @@ require_once get_template_directory() . '/inc/content-management/content-manager
 require_once get_template_directory() . '/inc/content-management/sequence-manager.php';
 require_once get_template_directory() . '/inc/content-management/search-engine.php';
 require_once get_template_directory() . '/inc/content-management/content-progress.php';
+require_once get_template_directory() . '/inc/content-management/lesson-manager.php';
 require_once get_template_directory() . '/inc/api/content-api.php';
 
 // Update theme activation to include content management setup
