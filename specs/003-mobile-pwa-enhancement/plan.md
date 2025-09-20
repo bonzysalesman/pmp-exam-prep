@@ -1,575 +1,217 @@
-# Implementation Plan: Mobile PWA Enhancement
-
-**Feature**: 003-mobile-pwa-enhancement  
-**Created**: September 20, 2025  
-**Timeline**: 8 weeks  
-**Dependencies**: 002-content-management-system, 001-progress-tracking-system
-
-## Architecture Overview
-
-### PWA System Design
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    PWA Application Layer                     │
-├─────────────────────────────────────────────────────────────┤
-│  Service Worker  │  Push Manager   │  Cache Manager         │
-│  - Caching       │  - Notifications│  - Storage Quota       │
-│  - Background    │  - Subscriptions│  - Content Priority    │
-│  - Network Proxy │  - Targeting    │  - Cleanup Strategy    │
-├─────────────────────────────────────────────────────────────┤
-│                    Mobile Experience Layer                   │
-│  - App Shell     │  - Touch UI     │  - Offline Detection   │
-│  - Navigation    │  - Gestures     │  - Sync Status         │
-│  - Dark Mode     │  - Haptics      │  - Performance         │
-├─────────────────────────────────────────────────────────────┤
-│                    Content & Data Layer                      │
-│  - IndexedDB     │  - Background   │  - WordPress API       │
-│  - Cache API     │  - Sync Queue   │  - Content Delivery    │
-│  - Local Storage │  - Conflict     │  - Progress Tracking   │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## Service Worker Implementation
-
-### Caching Strategy
-```javascript
-// Multi-layered caching approach
-const CACHE_STRATEGIES = {
-  'app-shell': 'cache-first',      // HTML, CSS, JS core
-  'content': 'stale-while-revalidate', // Lessons, tests
-  'api': 'network-first',          // Progress, user data
-  'images': 'cache-first',         // Static images
-  'dynamic': 'network-first'       // Real-time data
-};
-
-// Cache versioning and cleanup
-const CACHE_VERSION = 'pmp-v1.0.0';
-const MAX_CACHE_SIZE = 50; // MB
-const CACHE_EXPIRY = 7 * 24 * 60 * 60 * 1000; // 7 days
-```
-
-### Background Sync Implementation
-```javascript
-// Queue offline actions
-const SYNC_TAGS = {
-  'progress-update': 'sync-progress',
-  'test-completion': 'sync-test-results',
-  'bookmark-action': 'sync-bookmarks',
-  'content-interaction': 'sync-interactions'
-};
-
-// Conflict resolution strategy
-const CONFLICT_RESOLUTION = {
-  'progress': 'merge-latest',
-  'bookmarks': 'union',
-  'test-results': 'server-wins',
-  'user-preferences': 'client-wins'
-};
-```
-
-## Web App Manifest Configuration
-
-### Manifest Structure
-```json
-{
-  "name": "PMP Exam Prep",
-  "short_name": "PMP Prep",
-  "description": "Complete PMP certification preparation platform",
-  "start_url": "/",
-  "display": "standalone",
-  "orientation": "portrait-primary",
-  "theme_color": "#3b82f6",
-  "background_color": "#ffffff",
-  "categories": ["education", "productivity"],
-  "icons": [
-    {
-      "src": "/assets/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/assets/icons/icon-512.png",
-      "sizes": "512x512", 
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Take Practice Test",
-      "url": "/practice-tests",
-      "icons": [{"src": "/assets/icons/test-icon.png", "sizes": "96x96"}]
-    },
-    {
-      "name": "Study Lessons",
-      "url": "/lessons", 
-      "icons": [{"src": "/assets/icons/lesson-icon.png", "sizes": "96x96"}]
-    }
-  ]
-}
-```
-
-## Push Notification System
-
-### Server-Side Implementation
-```php
-// WordPress push notification integration
-class PMP_Push_Notifications {
-    private $vapid_keys;
-    private $subscription_endpoint = '/wp-json/pmp/v1/push/subscribe';
-    
-    public function send_notification($user_id, $payload) {
-        // VAPID authentication
-        // Payload encryption
-        // Delivery tracking
-        // Retry logic
-    }
-    
-    public function schedule_study_reminders() {
-        // User preference analysis
-        // Optimal timing calculation
-        // Personalized message generation
-        // Batch delivery optimization
-    }
-}
-```
-
-### Client-Side Subscription Management
-```javascript
-// Push subscription lifecycle
-class PushManager {
-    async subscribe() {
-        // Request permission
-        // Generate subscription
-        // Send to server
-        // Store locally
-    }
-    
-    async updatePreferences(settings) {
-        // Notification frequency
-        // Content types
-        // Quiet hours
-        // Delivery channels
-    }
-}
-```
-
-## Offline Content Management
-
-### Content Caching Strategy
-```javascript
-// Intelligent content prioritization
-const CONTENT_PRIORITY = {
-  'current-lesson': 1,        // Highest priority
-  'next-lessons': 2,          // Upcoming content
-  'practice-tests': 3,        // Assessment content
-  'resources': 4,             // Reference materials
-  'completed-content': 5      // Lowest priority
-};
-
-// Storage quota management
-class CacheManager {
-    async manageStorage() {
-        // Check available quota
-        // Prioritize content
-        // Clean old cache
-        // Optimize storage
-    }
-    
-    async preloadContent(contentIds) {
-        // Background download
-        // Progress tracking
-        // Error handling
-        // User notification
-    }
-}
-```
-
-### IndexedDB Schema
-```javascript
-// Offline database structure
-const DB_SCHEMA = {
-  version: 1,
-  stores: {
-    'lessons': {
-      keyPath: 'id',
-      indexes: ['domain', 'difficulty', 'cached_at']
-    },
-    'tests': {
-      keyPath: 'id', 
-      indexes: ['type', 'domain', 'cached_at']
-    },
-    'progress': {
-      keyPath: 'id',
-      indexes: ['user_id', 'content_id', 'updated_at']
-    },
-    'sync_queue': {
-      keyPath: 'id',
-      indexes: ['action_type', 'created_at', 'retry_count']
-    }
-  }
-};
-```
-
-## Mobile UI/UX Enhancements
-
-### Touch-Optimized Components
-```css
-/* Touch target optimization */
-.touch-target {
-  min-height: 44px;
-  min-width: 44px;
-  padding: 12px;
-  margin: 4px;
-}
-
-/* Gesture support */
-.swipeable {
-  touch-action: pan-x;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* Haptic feedback classes */
-.haptic-light { /* Light vibration */ }
-.haptic-medium { /* Medium vibration */ }
-.haptic-heavy { /* Strong vibration */ }
-```
-
-### Dark Mode Implementation
-```css
-/* CSS custom properties for theming */
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-  --accent-primary: #3b82f6;
-}
-
-[data-theme="dark"] {
-  --bg-primary: #1f2937;
-  --bg-secondary: #111827;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --accent-primary: #60a5fa;
-}
-
-/* System preference detection */
-@media (prefers-color-scheme: dark) {
-  :root { /* Dark theme variables */ }
-}
-```
-
-### Bottom Navigation
-```javascript
-// Mobile-first navigation component
-class BottomNavigation {
-    constructor() {
-        this.items = [
-            { icon: 'home', label: 'Dashboard', url: '/' },
-            { icon: 'book', label: 'Lessons', url: '/lessons' },
-            { icon: 'clipboard', label: 'Tests', url: '/tests' },
-            { icon: 'download', label: 'Resources', url: '/resources' },
-            { icon: 'user', label: 'Profile', url: '/profile' }
-        ];
-    }
-    
-    render() {
-        // Thumb-friendly positioning
-        // Active state management
-        // Badge notifications
-        // Smooth animations
-    }
-}
-```
-
-## Performance Optimization
-
-### Critical Resource Loading
-```javascript
-// Critical CSS inlining
-const CRITICAL_CSS = `
-  /* Above-the-fold styles */
-  /* Navigation styles */
-  /* Loading states */
-`;
-
-// Resource hints
-const RESOURCE_HINTS = {
-  preload: ['/assets/fonts/inter.woff2', '/assets/css/critical.css'],
-  prefetch: ['/api/user/progress', '/api/content/next'],
-  preconnect: ['https://fonts.googleapis.com', 'https://api.pmp-prep.com']
-};
-```
-
-### Code Splitting Strategy
-```javascript
-// Route-based code splitting
-const routes = {
-  '/': () => import('./pages/Dashboard'),
-  '/lessons': () => import('./pages/Lessons'),
-  '/tests': () => import('./pages/Tests'),
-  '/resources': () => import('./pages/Resources'),
-  '/profile': () => import('./pages/Profile')
-};
-
-// Component lazy loading
-const LazyComponent = lazy(() => import('./components/HeavyComponent'));
-```
-
-### Image Optimization
-```javascript
-// Responsive image loading
-class ImageOptimizer {
-    generateSrcSet(imagePath) {
-        return [
-          `${imagePath}?w=320 320w`,
-          `${imagePath}?w=640 640w`, 
-          `${imagePath}?w=1024 1024w`,
-          `${imagePath}?w=1920 1920w`
-        ].join(', ');
-    }
-    
-    lazyLoad() {
-        // Intersection Observer
-        // Progressive loading
-        // WebP format detection
-        // Fallback handling
-    }
-}
-```
-
-## Installation & Onboarding
-
-### Install Prompt Management
-```javascript
-class InstallPrompt {
-    constructor() {
-        this.deferredPrompt = null;
-        this.installCriteria = {
-            minVisits: 3,
-            minEngagement: 300, // seconds
-            hasCompletedLesson: true
-        };
-    }
-    
-    async showInstallPrompt() {
-        // Check user criteria
-        // Show custom prompt
-        // Track user response
-        // Handle installation
-    }
-    
-    trackInstallation() {
-        // Analytics integration
-        // User journey tracking
-        // Success metrics
-    }
-}
-```
-
-### PWA Onboarding Flow
-```javascript
-// First-time user experience
-const ONBOARDING_STEPS = [
-    {
-        title: 'Welcome to PMP Prep',
-        description: 'Your complete certification preparation platform',
-        action: 'continue'
-    },
-    {
-        title: 'Study Offline',
-        description: 'Download lessons and tests for offline access',
-        action: 'enable_offline'
-    },
-    {
-        title: 'Stay Motivated', 
-        description: 'Get study reminders and achievement notifications',
-        action: 'enable_notifications'
-    },
-    {
-        title: 'Install App',
-        description: 'Add to home screen for quick access',
-        action: 'install_pwa'
-    }
-];
-```
-
-## Analytics & Monitoring
-
-### PWA Performance Tracking
-```javascript
-// Core Web Vitals monitoring
-class PerformanceMonitor {
-    trackCoreWebVitals() {
-        // First Contentful Paint
-        // Largest Contentful Paint  
-        // First Input Delay
-        // Cumulative Layout Shift
-    }
-    
-    trackPWAMetrics() {
-        // Installation rate
-        // Offline usage
-        // Push notification engagement
-        // Background sync success
-    }
-}
-```
-
-### User Engagement Analytics
-```javascript
-// PWA-specific engagement tracking
-const PWA_EVENTS = {
-    'pwa_install_prompted': 'Installation prompt shown',
-    'pwa_installed': 'App installed to home screen',
-    'offline_content_accessed': 'Content viewed offline',
-    'background_sync_completed': 'Data synced in background',
-    'push_notification_clicked': 'Notification engagement'
-};
-```
-
-## Security Implementation
-
-### Content Security Policy
-```javascript
-// PWA-specific CSP headers
-const CSP_POLICY = {
-    'default-src': "'self'",
-    'script-src': "'self' 'unsafe-inline'",
-    'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
-    'font-src': "'self' fonts.gstatic.com",
-    'img-src': "'self' data: https:",
-    'connect-src': "'self' https://api.pmp-prep.com",
-    'manifest-src': "'self'",
-    'worker-src': "'self'"
-};
-```
-
-### Data Encryption
-```javascript
-// Sensitive data encryption for offline storage
-class DataEncryption {
-    async encryptData(data, key) {
-        // AES-GCM encryption
-        // Key derivation
-        // Secure storage
-    }
-    
-    async decryptData(encryptedData, key) {
-        // Decryption with validation
-        // Error handling
-        // Key rotation support
-    }
-}
-```
-
-## Testing Strategy
-
-### PWA Testing Framework
-```javascript
-// Service worker testing
-describe('Service Worker', () => {
-    test('caches app shell correctly', async () => {
-        // Cache validation
-        // Network interception
-        // Offline simulation
-    });
-    
-    test('background sync works', async () => {
-        // Queue management
-        // Sync execution
-        // Conflict resolution
-    });
-});
-
-// Push notification testing
-describe('Push Notifications', () => {
-    test('subscription management', async () => {
-        // Permission handling
-        // Subscription lifecycle
-        // Server communication
-    });
-});
-```
-
-### Performance Testing
-```javascript
-// Lighthouse CI integration
-const lighthouseConfig = {
-    ci: {
-        collect: {
-            numberOfRuns: 3,
-            settings: {
-                chromeFlags: '--no-sandbox --headless'
-            }
-        },
-        assert: {
-            assertions: {
-                'categories:performance': ['error', {minScore: 0.85}],
-                'categories:pwa': ['error', {minScore: 0.9}],
-                'categories:accessibility': ['error', {minScore: 0.9}]
-            }
-        }
-    }
-};
-```
-
-## Deployment Strategy
-
-### Progressive Rollout
-```javascript
-// Feature flag controlled rollout
-const PWA_FEATURES = {
-    'service_worker': { enabled: true, rollout: 100 },
-    'push_notifications': { enabled: true, rollout: 50 },
-    'offline_content': { enabled: true, rollout: 75 },
-    'install_prompt': { enabled: true, rollout: 25 }
-};
-```
-
-### Monitoring & Rollback
-```javascript
-// Real-time monitoring
-class PWAMonitor {
-    trackErrors() {
-        // Service worker errors
-        // Cache failures
-        // Sync failures
-        // Performance degradation
-    }
-    
-    triggerRollback(feature) {
-        // Automatic rollback triggers
-        // Graceful degradation
-        // User notification
-        // Analytics tracking
-    }
-}
-```
-
-## Success Metrics & KPIs
-
-### Technical Metrics
-- **Lighthouse PWA Score**: > 90
-- **Performance Score**: > 85 on mobile
-- **Installation Rate**: > 25% of mobile users
-- **Offline Usage**: > 15% of sessions include offline interactions
-
-### User Experience Metrics
-- **Session Duration**: 40% increase on mobile
-- **Return Rate**: > 60% of PWA users return within 7 days
-- **Engagement**: 30% increase in daily active mobile users
-- **Conversion**: 50% increase in mobile lesson completions
-
-### Business Impact Metrics
-- **Study Streak**: 25% improvement in streak maintenance
-- **Push CTR**: > 15% click-through rate on notifications
-- **Content Consumption**: 50% increase in mobile content views
-- **User Satisfaction**: > 4.5/5 rating for mobile experience
-
+---
+description: "Implementation plan template for feature development"
+scripts:
+  sh: scripts/bash/update-agent-context.sh __AGENT__
+  ps: scripts/powershell/update-agent-context.ps1 -AgentType __AGENT__
 ---
 
-**This implementation plan provides a comprehensive roadmap for transforming the PMP preparation platform into a world-class Progressive Web App with offline capability, push notifications, and native app-like experience.**
+# Implementation Plan: mobile pwa enhancement
+
+**Branch**: `003-mobile-pwa-enhancement` | **Date**: September 20, 2025 | **Spec**: [link]
+**Input**: Feature specification from `/specs/003-mobile-pwa-enhancement/spec.md`
+
+## Execution Flow (/plan command scope)
+```
+1. Load feature spec from Input path
+   → If not found: ERROR "No feature spec at {path}"
+2. Fill Technical Context (scan for NEEDS CLARIFICATION)
+   → Detect Project Type from context (web=frontend+backend, mobile=app+api)
+   → Set Structure Decision based on project type
+3. Fill the Constitution Check section based on the content of the constitution document.
+4. Evaluate Constitution Check section below
+   → If violations exist: Document in Complexity Tracking
+   → If no justification possible: ERROR "Simplify approach first"
+   → Update Progress Tracking: Initial Constitution Check
+5. Execute Phase 0 → research.md
+   → If NEEDS CLARIFICATION remain: ERROR "Resolve unknowns"
+6. Execute Phase 1 → contracts, data-model.md, quickstart.md, agent-specific template file (e.g., `CLAUDE.md` for Claude Code, `.github/copilot-instructions.md` for GitHub Copilot, `GEMINI.md` for Gemini CLI, `QWEN.md` for Qwen Code or `AGENTS.md` for opencode).
+7. Re-evaluate Constitution Check section
+   → If new violations: Refactor design, return to Phase 1
+   → Update Progress Tracking: Post-Design Constitution Check
+8. Plan Phase 2 → Describe task generation approach (DO NOT create tasks.md)
+9. STOP - Ready for /tasks command
+```
+
+**IMPORTANT**: The /plan command STOPS at step 7. Phases 2-4 are executed by other commands:
+- Phase 2: /tasks command creates tasks.md
+- Phase 3-4: Implementation execution (manual or via tools)
+
+## Summary
+[Extract from feature spec: primary requirement + technical approach from research]
+
+## Technical Context
+**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
+**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
+**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
+**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
+**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+**Project Type**: [single/web/mobile - determines source structure]  
+**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
+**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
+**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+
+## Constitution Check
+*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+
+[Gates determined based on constitution file]
+
+## Project Structure
+
+### Documentation (this feature)
+```
+specs/[###-feature]/
+├── plan.md              # This file (/plan command output)
+├── research.md          # Phase 0 output (/plan command)
+├── data-model.md        # Phase 1 output (/plan command)
+├── quickstart.md        # Phase 1 output (/plan command)
+├── contracts/           # Phase 1 output (/plan command)
+└── tasks.md             # Phase 2 output (/tasks command - NOT created by /plan)
+```
+
+### Source Code (repository root)
+```
+# Option 1: Single project (DEFAULT)
+src/
+├── models/
+├── services/
+├── cli/
+└── lib/
+
+tests/
+├── contract/
+├── integration/
+└── unit/
+
+# Option 2: Web application (when "frontend" + "backend" detected)
+backend/
+├── src/
+│   ├── models/
+│   ├── services/
+│   └── api/
+└── tests/
+
+frontend/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   └── services/
+└── tests/
+
+# Option 3: Mobile + API (when "iOS/Android" detected)
+api/
+└── [same as backend above]
+
+ios/ or android/
+└── [platform-specific structure]
+```
+
+**Structure Decision**: [DEFAULT to Option 1 unless Technical Context indicates web/mobile app]
+
+## Phase 0: Outline & Research
+1. **Extract unknowns from Technical Context** above:
+   - For each NEEDS CLARIFICATION → research task
+   - For each dependency → best practices task
+   - For each integration → patterns task
+
+2. **Generate and dispatch research agents**:
+   ```
+   For each unknown in Technical Context:
+     Task: "Research {unknown} for {feature context}"
+   For each technology choice:
+     Task: "Find best practices for {tech} in {domain}"
+   ```
+
+3. **Consolidate findings** in `research.md` using format:
+   - Decision: [what was chosen]
+   - Rationale: [why chosen]
+   - Alternatives considered: [what else evaluated]
+
+**Output**: research.md with all NEEDS CLARIFICATION resolved
+
+## Phase 1: Design & Contracts
+*Prerequisites: research.md complete*
+
+1. **Extract entities from feature spec** → `data-model.md`:
+   - Entity name, fields, relationships
+   - Validation rules from requirements
+   - State transitions if applicable
+
+2. **Generate API contracts** from functional requirements:
+   - For each user action → endpoint
+   - Use standard REST/GraphQL patterns
+   - Output OpenAPI/GraphQL schema to `/contracts/`
+
+3. **Generate contract tests** from contracts:
+   - One test file per endpoint
+   - Assert request/response schemas
+   - Tests must fail (no implementation yet)
+
+4. **Extract test scenarios** from user stories:
+   - Each story → integration test scenario
+   - Quickstart test = story validation steps
+
+5. **Update agent file incrementally** (O(1) operation):
+   - Run `{SCRIPT}` for your AI assistant
+   - If exists: Add only NEW tech from current plan
+   - Preserve manual additions between markers
+   - Update recent changes (keep last 3)
+   - Keep under 150 lines for token efficiency
+   - Output to repository root
+
+**Output**: data-model.md, /contracts/*, failing tests, quickstart.md, agent-specific file
+
+## Phase 2: Task Planning Approach
+*This section describes what the /tasks command will do - DO NOT execute during /plan*
+
+**Task Generation Strategy**:
+- Load `.specify/templates/tasks-template.md` as base
+- Generate tasks from Phase 1 design docs (contracts, data model, quickstart)
+- Each contract → contract test task [P]
+- Each entity → model creation task [P] 
+- Each user story → integration test task
+- Implementation tasks to make tests pass
+
+**Ordering Strategy**:
+- TDD order: Tests before implementation 
+- Dependency order: Models before services before UI
+- Mark [P] for parallel execution (independent files)
+
+**Estimated Output**: 25-30 numbered, ordered tasks in tasks.md
+
+**IMPORTANT**: This phase is executed by the /tasks command, NOT by /plan
+
+## Phase 3+: Future Implementation
+*These phases are beyond the scope of the /plan command*
+
+**Phase 3**: Task execution (/tasks command creates tasks.md)  
+**Phase 4**: Implementation (execute tasks.md following constitutional principles)  
+**Phase 5**: Validation (run tests, execute quickstart.md, performance validation)
+
+## Complexity Tracking
+*Fill ONLY if Constitution Check has violations that must be justified*
+
+| Violation | Why Needed | Simpler Alternative Rejected Because |
+|-----------|------------|-------------------------------------|
+| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+
+
+## Progress Tracking
+*This checklist is updated during execution flow*
+
+**Phase Status**:
+- [ ] Phase 0: Research complete (/plan command)
+- [ ] Phase 1: Design complete (/plan command)
+- [ ] Phase 2: Task planning complete (/plan command - describe approach only)
+- [ ] Phase 3: Tasks generated (/tasks command)
+- [ ] Phase 4: Implementation complete
+- [ ] Phase 5: Validation passed
+
+**Gate Status**:
+- [ ] Initial Constitution Check: PASS
+- [ ] Post-Design Constitution Check: PASS
+- [ ] All NEEDS CLARIFICATION resolved
+- [ ] Complexity deviations documented
+
+---
+*Based on Constitution v2.1.1 - See `/memory/constitution.md`*
