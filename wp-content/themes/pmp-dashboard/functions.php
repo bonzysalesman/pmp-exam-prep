@@ -3,6 +3,9 @@
  * PMP Dashboard Theme Functions
  */
 
+// Include PWA functionality
+require_once get_template_directory() . '/inc/pwa-init.php';
+
 // Theme setup
 function pmp_theme_setup() {
     add_theme_support('title-tag');
