@@ -203,6 +203,7 @@ require_once get_template_directory() . '/inc/api/content-api.php';
 require_once get_template_directory() . '/inc/practice-tests/test-engine.php';
 require_once get_template_directory() . '/inc/practice-tests/question-bank.php';
 require_once get_template_directory() . '/inc/practice-tests/results-analyzer.php';
+require_once get_template_directory() . '/inc/api/test-api.php';
 
 // Update theme activation to include content management setup
 function pmp_content_activation() {
