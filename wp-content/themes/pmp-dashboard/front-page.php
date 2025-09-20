@@ -41,7 +41,8 @@ get_header(); ?>
 </header>
 
 <!-- Hero Section -->
-<section class="relative py-20 lg:py-32 overflow-hidden">
+<section class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/pmp_one.jpeg'); mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));"></div>
     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 opacity-90"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
         <h1 class="text-5xl xl:text-6xl font-black leading-tight text-secondary mb-6 uppercase" style="line-height: 1.1618;">
