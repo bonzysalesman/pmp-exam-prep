@@ -34,7 +34,9 @@ class PMP_Progress_Database {
             PRIMARY KEY (id),
             UNIQUE KEY unique_user_domain (user_id, domain),
             KEY idx_user_id (user_id),
-            KEY idx_domain (domain)
+            KEY idx_domain (domain),
+            KEY idx_completion (completion_percentage),
+            KEY idx_updated (last_updated)
         ) $charset_collate;";
         
         // Study Sessions table
@@ -50,7 +52,9 @@ class PMP_Progress_Database {
             PRIMARY KEY (id),
             UNIQUE KEY unique_user_date (user_id, session_date),
             KEY idx_user_id (user_id),
-            KEY idx_session_date (session_date)
+            KEY idx_session_date (session_date),
+            KEY idx_domain_focus (domain_focus),
+            KEY idx_user_date (user_id, session_date)
         ) $charset_collate;";
         
         // Lesson Progress table
@@ -69,7 +73,9 @@ class PMP_Progress_Database {
             UNIQUE KEY unique_user_lesson (user_id, lesson_id),
             KEY idx_user_id (user_id),
             KEY idx_lesson_id (lesson_id),
-            KEY idx_status (status)
+            KEY idx_status (status),
+            KEY idx_completed (completed_at),
+            KEY idx_user_status (user_id, status)
         ) $charset_collate;";
         
         // Study Streak table
@@ -86,6 +92,7 @@ class PMP_Progress_Database {
             PRIMARY KEY (id),
             UNIQUE KEY unique_user (user_id),
             KEY idx_current_streak (current_streak),
+            KEY idx_longest_streak (longest_streak),
             KEY idx_last_study_date (last_study_date)
         ) $charset_collate;";
         
@@ -97,6 +104,9 @@ class PMP_Progress_Database {
         
         // Initialize domain data
         self::initialize_domain_data();
+        
+        // Set database version
+        update_option('pmp_progress_db_version', '1.0');
     }
     
     /**

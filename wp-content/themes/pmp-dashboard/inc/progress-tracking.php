@@ -77,53 +77,65 @@ class PMP_Progress_Tracker {
             SELECT COUNT(*) 
             FROM {$wpdb->prefix}pmp_lesson_progress lp
             JOIN {$wpdb->prefix}posts p ON lp.lesson_id = p.ID
+            LEFT JOIN {$wpdb->prefix}postmeta pm ON p.ID = pm.post_id AND pm.meta_key = 'pmp_domain'
             WHERE lp.user_id = %d 
             AND lp.status = 'completed'
             AND p.post_type = 'lesson'
-            AND EXISTS (
-                SELECT 1 FROM {$wpdb->prefix}postmeta pm 
-                WHERE pm.post_id = p.ID 
-                AND pm.meta_key = 'pmp_domain' 
-                AND pm.meta_value = %s
-            )
-        ", $user_id, $domain));
+            AND p.post_status = 'publish'
+            AND (pm.meta_value = %s OR (pm.meta_value IS NULL AND %s = 'process'))
+        ", $user_id, $domain, $domain));
         
         // Get total time spent in domain
         $total_time = $wpdb->get_var($wpdb->prepare("
-            SELECT SUM(lp.time_spent_minutes)
+            SELECT COALESCE(SUM(lp.time_spent_minutes), 0)
             FROM {$wpdb->prefix}pmp_lesson_progress lp
             JOIN {$wpdb->prefix}posts p ON lp.lesson_id = p.ID
+            LEFT JOIN {$wpdb->prefix}postmeta pm ON p.ID = pm.post_id AND pm.meta_key = 'pmp_domain'
             WHERE lp.user_id = %d
             AND p.post_type = 'lesson'
-            AND EXISTS (
-                SELECT 1 FROM {$wpdb->prefix}postmeta pm 
-                WHERE pm.post_id = p.ID 
-                AND pm.meta_key = 'pmp_domain' 
-                AND pm.meta_value = %s
-            )
-        ", $user_id, $domain)) ?: 0;
+            AND p.post_status = 'publish'
+            AND (pm.meta_value = %s OR (pm.meta_value IS NULL AND %s = 'process'))
+        ", $user_id, $domain, $domain));
         
-        // Get total lessons for domain
-        $total_lessons = $wpdb->get_var($wpdb->prepare(
+        // Get total lessons for domain from existing progress record
+        $existing_progress = $wpdb->get_row($wpdb->prepare(
             "SELECT total_lessons FROM {$wpdb->prefix}pmp_user_progress WHERE user_id = %d AND domain = %s",
             $user_id, $domain
         ));
         
+        $total_lessons = $existing_progress ? $existing_progress->total_lessons : self::get_domain_lesson_count($domain);
+        
         // Calculate completion percentage
         $completion_percentage = $total_lessons > 0 ? ($completed_count / $total_lessons) * 100 : 0;
         
-        // Update domain progress
-        $wpdb->update(
+        // Update or insert domain progress
+        $wpdb->replace(
             $wpdb->prefix . 'pmp_user_progress',
             [
-                'completion_percentage' => $completion_percentage,
+                'user_id' => $user_id,
+                'domain' => $domain,
+                'completion_percentage' => round($completion_percentage, 2),
                 'lessons_completed' => $completed_count,
+                'total_lessons' => $total_lessons,
                 'time_spent_minutes' => $total_time
             ],
-            ['user_id' => $user_id, 'domain' => $domain],
-            ['%f', '%d', '%d'],
-            ['%d', '%s']
+            ['%d', '%s', '%f', '%d', '%d', '%d']
         );
+        
+        return $completion_percentage;
+    }
+    
+    /**
+     * Get lesson count for domain
+     */
+    private static function get_domain_lesson_count($domain) {
+        $domain_lessons = [
+            'people' => 38,           // 42% of 91 lessons
+            'process' => 45,          // 50% of 91 lessons  
+            'business_environment' => 8  // 8% of 91 lessons
+        ];
+        
+        return $domain_lessons[$domain] ?? 45; // Default to process
     }
     
     /**
@@ -179,7 +191,7 @@ class PMP_Progress_Tracker {
         global $wpdb;
         
         $today = current_time('Y-m-d');
-        $yesterday = date('Y-m-d', strtotime('-1 day'));
+        $yesterday = date('Y-m-d', strtotime($today . ' -1 day'));
         
         // Get current streak data
         $streak_data = $wpdb->get_row($wpdb->prepare(
@@ -204,16 +216,18 @@ class PMP_Progress_Tracker {
             return;
         }
         
+        // Skip if already studied today
+        if ($streak_data->last_study_date === $today) {
+            return;
+        }
+        
         // Calculate new streak
         $current_streak = 1;
         $longest_streak = $streak_data->longest_streak;
-        $total_study_days = $streak_data->total_study_days;
+        $total_study_days = $streak_data->total_study_days + 1;
         $streak_start_date = $today;
         
-        if ($streak_data->last_study_date === $today) {
-            // Already studied today, no change needed
-            return;
-        } elseif ($streak_data->last_study_date === $yesterday) {
+        if ($streak_data->last_study_date === $yesterday) {
             // Consecutive day, increment streak
             $current_streak = $streak_data->current_streak + 1;
             $streak_start_date = $streak_data->streak_start_date;
@@ -222,11 +236,6 @@ class PMP_Progress_Tracker {
         // Update longest streak if current exceeds it
         if ($current_streak > $longest_streak) {
             $longest_streak = $current_streak;
-        }
-        
-        // Increment total study days if not already studied today
-        if ($streak_data->last_study_date !== $today) {
-            $total_study_days++;
         }
         
         // Update streak record
