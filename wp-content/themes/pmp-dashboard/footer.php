@@ -55,7 +55,7 @@
     <style>
         footer img {
             height: auto;
-            max-width: 100%;
+            max-width: 15rem;
         }
     </style>
 
