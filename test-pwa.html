@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMP Exam Prep - PWA Test</title>
+    <link rel="manifest" href="wp-content/themes/pmp-dashboard/pwa/manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 2rem; background: #f8fafc; }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { color: #2563eb; }
+        .feature { background: white; padding: 1rem; margin: 1rem 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 PMP Exam Prep</h1>
+        <div class="feature">
+            <h3>✅ PWA Features</h3>
+            <p>Service worker, manifest, offline support</p>
+        </div>
+        <div class="feature">
+            <h3>📱 Mobile Optimized</h3>
+            <p>Responsive design, touch-friendly</p>
+        </div>
+        <div class="feature">
+            <h3>🔄 Offline Ready</h3>
+            <p>Cached lessons, background sync</p>
+        </div>
+    </div>
+    
+    <script src="wp-content/themes/pmp-dashboard/pwa/register-sw.js"></script>
+    <script src="wp-content/themes/pmp-dashboard/assets/js/offline-indicator.js"></script>
+</body>
+</html>
