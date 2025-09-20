@@ -10,11 +10,16 @@ get_header(); ?>
     <div class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-6">
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-900">
-                        Welcome back, <?php echo esc_html(wp_get_current_user()->display_name); ?>!
-                    </h1>
-                    <p class="text-gray-600">Track your PMP exam preparation progress</p>
+                <div class="flex items-center space-x-4">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/mohlomi_institute_logo.png" 
+                         alt="Mohlomi Institute" 
+                         class="h-10 w-auto">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">
+                            Welcome back, <?php echo esc_html(wp_get_current_user()->display_name); ?>!
+                        </h1>
+                        <p class="text-gray-600">Track your PMP exam preparation progress</p>
+                    </div>
                 </div>
                 <div class="flex items-center space-x-4">
                     <a href="<?php echo esc_url(get_post_type_archive_link('lesson')); ?>" 

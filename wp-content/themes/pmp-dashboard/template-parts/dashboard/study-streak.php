@@ -127,4 +127,3 @@ $days_to_milestone = $streak_data['next_milestone'] - $streak_data['current_stre
         </div>
     </div>
 </div>
-?>
