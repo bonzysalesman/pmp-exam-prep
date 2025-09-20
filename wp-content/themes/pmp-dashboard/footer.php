@@ -52,6 +52,13 @@
         </div>
     </footer>
 
+    <style>
+        footer img {
+            height: auto;
+            max-width: 100%;
+        }
+    </style>
+
     <script>
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
