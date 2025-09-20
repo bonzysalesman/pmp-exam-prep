@@ -6,22 +6,25 @@
 get_header(); ?>
 
 <div class="min-h-screen bg-gray-50">
-    <!-- Dashboard Header -->
-    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+    <!-- Dashboard Breadcrumb -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-16 z-30" style="background-color: #EFEFEF;" aria-label="Dashboard breadcrumb">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 sm:h-20">
+            <!-- Breadcrumb Navigation -->
+            <div class="flex items-center py-3 text-sm">
+                <a href="<?php echo home_url(); ?>" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <i class="fas fa-home mr-1"></i>
+                    Home
+                </a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400 text-xs"></i>
+                <span class="text-gray-900 font-medium">Dashboard</span>
+            </div>
+            
+            <!-- Dashboard Header Content -->
+            <div class="flex items-center justify-between pb-4">
                 
-                <!-- Left Section: Logo & Welcome -->
+                <!-- Left Section: Welcome -->
                 <div class="flex items-center min-w-0 flex-1">
-                    <!-- Logo -->
-                    <div class="flex-shrink-0">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/mohlomi_institute_logo.png" 
-                             alt="Mohlomi Institute" 
-                             class="h-8 sm:h-10 w-auto">
-                    </div>
-                    
-                    <!-- Welcome Text - Hidden on mobile, shown on sm+ -->
-                    <div class="hidden sm:block ml-4 min-w-0">
+                    <div class="min-w-0">
                         <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 truncate">
                             Welcome back, <?php echo esc_html(wp_get_current_user()->display_name); ?>!
                         </h1>
@@ -29,7 +32,7 @@ get_header(); ?>
                     </div>
                 </div>
                 
-                <!-- Right Section: Actions & Menu -->
+                <!-- Right Section: Actions & Progress -->
                 <div class="flex items-center space-x-2 sm:space-x-4">
                     
                     <!-- Progress Indicator - Hidden on mobile -->
@@ -54,21 +57,22 @@ get_header(); ?>
                     
                     <!-- Mobile Menu Button -->
                     <button type="button" 
-                            class="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
-                            aria-expanded="false"
+                            class="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" 
+                            aria-expanded="false" 
+                            aria-label="Open dashboard menu"
                             onclick="toggleMobileMenu()">
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fas fa-bars text-lg" id="menu-icon"></i>
+                        <div class="hamburger-icon">
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                        </div>
                     </button>
                 </div>
             </div>
             
-            <!-- Mobile Welcome Text - Shown only on mobile -->
+            <!-- Mobile Progress - Shown only on mobile -->
             <div class="sm:hidden pb-4">
-                <h1 class="text-lg font-bold text-gray-900 truncate">
-                    Welcome, <?php echo esc_html(explode(' ', wp_get_current_user()->display_name)[0]); ?>!
-                </h1>
-                <div class="flex items-center justify-between mt-2">
+                <div class="flex items-center justify-between">
                     <p class="text-sm text-gray-600">Your progress</p>
                     <div class="flex items-center space-x-2">
                         <div class="w-20 bg-gray-200 rounded-full h-2">
@@ -84,6 +88,15 @@ get_header(); ?>
         <!-- Mobile Navigation Menu -->
         <div class="sm:hidden hidden" id="mobile-menu">
             <div class="px-4 pt-2 pb-3 space-y-1 bg-gray-50 border-t border-gray-200">
+                <!-- Close Button -->
+                <div class="flex justify-end mb-2">
+                    <button type="button" 
+                            class="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
+                            onclick="toggleMobileMenu()">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                
                 <a href="<?php echo esc_url(get_post_type_archive_link('lesson')); ?>" 
                    class="flex items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md">
                     <i class="fas fa-book mr-3 text-gray-400"></i>
@@ -106,22 +119,20 @@ get_header(); ?>
                 </a>
             </div>
         </div>
-    </header>
+    </nav>
 
     <script>
     function toggleMobileMenu() {
         const menu = document.getElementById('mobile-menu');
-        const icon = document.getElementById('menu-icon');
+        const hamburger = document.querySelector('.hamburger-icon');
         const isHidden = menu.classList.contains('hidden');
         
         if (isHidden) {
             menu.classList.remove('hidden');
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
+            hamburger.classList.add('open');
         } else {
             menu.classList.add('hidden');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+            hamburger.classList.remove('open');
         }
     }
     
@@ -129,11 +140,13 @@ get_header(); ?>
     document.addEventListener('click', function(event) {
         const menu = document.getElementById('mobile-menu');
         const button = event.target.closest('button');
+        const hamburger = document.querySelector('.hamburger-icon');
         
         if (!menu.contains(event.target) && !button) {
             menu.classList.add('hidden');
-            document.getElementById('menu-icon').classList.remove('fa-times');
-            document.getElementById('menu-icon').classList.add('fa-bars');
+            if (hamburger) {
+                hamburger.classList.remove('open');
+            }
         }
     });
     </script>
@@ -211,5 +224,57 @@ get_header(); ?>
 <script>
 window.pmpCurrentUserId = <?php echo get_current_user_id(); ?>;
 </script>
+
+<style>
+/* Hamburger Menu Animation */
+.hamburger-icon {
+    width: 20px;
+    height: 16px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: .3s ease-in-out;
+    cursor: pointer;
+}
+
+.hamburger-line {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: currentColor;
+    border-radius: 1px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+.hamburger-line:nth-child(1) {
+    top: 0px;
+}
+
+.hamburger-line:nth-child(2) {
+    top: 7px;
+}
+
+.hamburger-line:nth-child(3) {
+    top: 14px;
+}
+
+.hamburger-icon.open .hamburger-line:nth-child(1) {
+    top: 7px;
+    transform: rotate(135deg);
+}
+
+.hamburger-icon.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    left: -20px;
+}
+
+.hamburger-icon.open .hamburger-line:nth-child(3) {
+    top: 7px;
+    transform: rotate(-135deg);
+}
+</style>
 
 <?php get_footer(); ?>
