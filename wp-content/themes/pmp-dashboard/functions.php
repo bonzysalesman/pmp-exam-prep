@@ -202,6 +202,7 @@ require_once get_template_directory() . '/inc/api/content-api.php';
 // Include practice test system
 require_once get_template_directory() . '/inc/practice-tests/test-engine.php';
 require_once get_template_directory() . '/inc/practice-tests/question-bank.php';
+require_once get_template_directory() . '/inc/practice-tests/results-analyzer.php';
 
 // Update theme activation to include content management setup
 function pmp_content_activation() {
