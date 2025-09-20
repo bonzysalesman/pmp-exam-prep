@@ -119,25 +119,25 @@
             <!-- Desktop Navigation -->
             <div class="hidden lg:flex items-center space-x-1">
                 <a href="<?php echo home_url(); ?>" 
-                   class="<?php echo is_front_page() ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10">
+                   class="<?php echo is_front_page() ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10 pr-2">
                     Home
                 </a>
                 <a href="<?php echo get_post_type_archive_link('work_group'); ?>" 
-                   class="<?php echo is_post_type_archive('work_group') ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10">
+                   class="<?php echo is_post_type_archive('work_group') ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10 pr-2">
                     Courses
                 </a>
                 <?php if (is_user_logged_in()): ?>
                 <a href="<?php echo get_permalink(get_page_by_path('dashboard')); ?>" 
-                   class="<?php echo is_page('dashboard') ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10">
+                   class="<?php echo is_page('dashboard') ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10 pr-2">
                     My Learning
                 </a>
                 <?php endif; ?>
                 <a href="<?php echo get_permalink(get_page_by_path('resources')); ?>" 
-                   class="<?php echo is_page('resources') ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10">
+                   class="<?php echo is_page('resources') ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10 pr-2">
                     Resources
                 </a>
                 <a href="<?php echo get_permalink(get_page_by_path('community')); ?>" 
-                   class="<?php echo is_page('community') ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10">
+                   class="<?php echo is_page('community') ? 'text-primary font-medium' : 'text-secondary hover:text-primary font-light'; ?> text-lg px-4 py-2 transition-colors duration-300 border-r border-dotted border-black border-opacity-10 pr-2">
                     Community
                 </a>
                 <a href="<?php echo get_permalink(get_page_by_path('about')); ?>" 
@@ -149,11 +149,21 @@
             <!-- Right Section: User Actions & Mobile Menu -->
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <?php if (is_user_logged_in()): ?>
-                    <!-- Desktop User Menu -->
-                    <div class="hidden lg:flex items-center space-x-3">
-                        <span class="text-sm text-gray-600">
-                            Hi, <?php echo esc_html(explode(' ', wp_get_current_user()->display_name)[0]); ?>
-                        </span>
+                    <!-- Desktop User Menu with Dropdown -->
+                    <div class="hidden lg:flex items-center space-x-2">
+                        <div class="relative">
+                            <button class="flex items-center text-secondary hover:text-primary px-3 py-2 transition-colors duration-300" onclick="toggleAccountDropdown()">
+                                <span class="font-bold">MY ACCOUNT</span>
+                                <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                            </button>
+                            <div id="accountDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                                <a href="<?php echo get_permalink(get_page_by_path('dashboard')); ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">Dashboard</a>
+                                <a href="<?php echo get_edit_user_link(); ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                                <hr class="my-1">
+                                <a href="<?php echo wp_logout_url(home_url()); ?>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b-lg">Logout</a>
+                            </div>
+                        </div>
                         <a href="<?php echo get_permalink(get_page_by_path('dashboard')); ?>" 
                            class="inline-flex items-center px-3 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors duration-200">
                             <i class="fas fa-tachometer-alt mr-2 text-xs"></i>
@@ -324,12 +334,25 @@ function toggleMainMenu() {
     }
 }
 
+function toggleAccountDropdown() {
+    const dropdown = document.getElementById('accountDropdown');
+    dropdown.classList.toggle('hidden');
+}
+
 // Close mobile menu when clicking outside or on backdrop
 document.addEventListener('click', function(event) {
     const menu = document.getElementById('main-mobile-menu');
     const panel = document.getElementById('flyout-panel');
     const button = event.target.closest('button');
     const hamburger = document.querySelector('.hamburger-icon');
+    
+    // Close account dropdown when clicking outside
+    const accountDropdown = document.getElementById('accountDropdown');
+    const accountButton = event.target.closest('button[onclick="toggleAccountDropdown()"]');
+    
+    if (accountDropdown && !accountDropdown.contains(event.target) && !accountButton) {
+        accountDropdown.classList.add('hidden');
+    }
     
     // Check if click is on backdrop or outside panel
     if (menu && !menu.classList.contains('hidden') && 
@@ -353,8 +376,14 @@ document.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         const menu = document.getElementById('main-mobile-menu');
+        const accountDropdown = document.getElementById('accountDropdown');
+        
         if (menu && !menu.classList.contains('hidden')) {
             toggleMainMenu();
+        }
+        
+        if (accountDropdown && !accountDropdown.classList.contains('hidden')) {
+            accountDropdown.classList.add('hidden');
         }
     }
 });
