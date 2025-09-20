@@ -193,6 +193,8 @@ require_once get_template_directory() . '/inc/content-management/taxonomies.php'
 require_once get_template_directory() . '/inc/content-management/content-manager.php';
 require_once get_template_directory() . '/inc/content-management/sequence-manager.php';
 require_once get_template_directory() . '/inc/content-management/search-engine.php';
+require_once get_template_directory() . '/inc/content-management/content-progress.php';
+require_once get_template_directory() . '/inc/api/content-api.php';
 
 // Update theme activation to include content management setup
 function pmp_content_activation() {
@@ -217,3 +219,31 @@ function pmp_test_shortcode($atts) {
     return ob_get_clean();
 }
 add_shortcode('pmp_test', 'pmp_test_shortcode');
+// Add content engagement table on theme activation
+function pmp_create_engagement_table() {
+    global $wpdb;
+    
+    $table_name = $wpdb->prefix . 'pmp_content_engagement';
+    
+    $charset_collate = $wpdb->get_charset_collate();
+    
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+        user_id BIGINT UNSIGNED NOT NULL,
+        content_id BIGINT UNSIGNED NOT NULL,
+        content_type VARCHAR(50) NOT NULL,
+        total_time_spent INT NOT NULL DEFAULT 0,
+        last_accessed TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        access_count INT NOT NULL DEFAULT 0,
+        PRIMARY KEY (id),
+        UNIQUE KEY unique_user_content (user_id, content_id),
+        KEY idx_user_id (user_id),
+        KEY idx_content_id (content_id),
+        KEY idx_content_type (content_type),
+        KEY idx_last_accessed (last_accessed)
+    ) $charset_collate;";
+    
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+add_action('after_switch_theme', 'pmp_create_engagement_table');
