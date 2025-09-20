@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Test - PMP Prep</title>
+    <link rel="manifest" href="wp-content/themes/pmp-dashboard/pwa/manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 2rem; background: #f8fafc; }
+        .test-section { background: white; padding: 1.5rem; margin: 1rem 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .status { padding: 0.5rem; border-radius: 4px; margin: 0.5rem 0; }
+        .online { background: #dcfce7; color: #166534; }
+        .offline { background: #fef2f2; color: #dc2626; }
+        button { background: #2563eb; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; margin: 0.5rem; }
+        #cache-status { font-family: monospace; background: #f3f4f6; padding: 1rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 PWA Offline Testing</h1>
+    
+    <div class="test-section">
+        <h3>Connection Status</h3>
+        <div id="connection-status" class="status">Checking...</div>
+        <button onclick="testConnection()">Test Connection</button>
+    </div>
+    
+    <div class="test-section">
+        <h3>Service Worker Status</h3>
+        <div id="sw-status">Checking service worker...</div>
+        <button onclick="checkServiceWorker()">Check SW</button>
+    </div>
+    
+    <div class="test-section">
+        <h3>Cache Test</h3>
+        <div id="cache-status">Loading cache info...</div>
+        <button onclick="testCache()">Test Cache</button>
+        <button onclick="clearCache()">Clear Cache</button>
+    </div>
+    
+    <div class="test-section">
+        <h3>Offline Simulation</h3>
+        <p>Use DevTools → Network → Offline to test offline functionality</p>
+        <button onclick="simulateOffline()">Simulate Offline Request</button>
+        <div id="offline-test-result"></div>
+    </div>
+
+    <script>
+        // Connection status
+        function updateConnectionStatus() {
+            const status = document.getElementById('connection-status');
+            if (navigator.onLine) {
+                status.textContent = '✅ Online';
+                status.className = 'status online';
+            } else {
+                status.textContent = '📡 Offline';
+                status.className = 'status offline';
+            }
+        }
+        
+        function testConnection() {
+            updateConnectionStatus();
+            fetch('/test-connection')
+                .then(() => console.log('Connection test: OK'))
+                .catch(() => console.log('Connection test: Failed'));
+        }
+        
+        // Service worker status
+        function checkServiceWorker() {
+            const status = document.getElementById('sw-status');
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(reg => {
+                    if (reg) {
+                        status.innerHTML = '✅ Service Worker registered<br>Scope: ' + reg.scope;
+                    } else {
+                        status.innerHTML = '❌ Service Worker not registered';
+                    }
+                });
+            } else {
+                status.innerHTML = '❌ Service Worker not supported';
+            }
+        }
+        
+        // Cache testing
+        async function testCache() {
+            const status = document.getElementById('cache-status');
+            try {
+                const cacheNames = await caches.keys();
+                status.innerHTML = 'Cache Names:\n' + cacheNames.join('\n');
+                
+                for (const name of cacheNames) {
+                    const cache = await caches.open(name);
+                    const keys = await cache.keys();
+                    status.innerHTML += '\n\n' + name + ' (' + keys.length + ' items):\n';
+                    keys.forEach(req => {
+                        status.innerHTML += '- ' + req.url + '\n';
+                    });
+                }
+            } catch (error) {
+                status.innerHTML = 'Cache test failed: ' + error.message;
+            }
+        }
+        
+        async function clearCache() {
+            const cacheNames = await caches.keys();
+            await Promise.all(cacheNames.map(name => caches.delete(name)));
+            document.getElementById('cache-status').innerHTML = 'All caches cleared';
+        }
+        
+        // Offline simulation
+        function simulateOffline() {
+            const result = document.getElementById('offline-test-result');
+            result.innerHTML = 'Testing offline request...';
+            
+            fetch('/non-existent-endpoint')
+                .then(response => {
+                    result.innerHTML = '✅ Got response (likely from cache): ' + response.status;
+                })
+                .catch(error => {
+                    result.innerHTML = '📡 Request failed (expected when offline): ' + error.message;
+                });
+        }
+        
+        // Initialize
+        updateConnectionStatus();
+        checkServiceWorker();
+        testCache();
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+    </script>
+    
+    <script src="wp-content/themes/pmp-dashboard/pwa/register-sw.js"></script>
+    <script src="wp-content/themes/pmp-dashboard/assets/js/offline-indicator.js"></script>
+</body>
+</html>
