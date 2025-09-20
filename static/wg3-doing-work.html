@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WG3: Doing the Work - PMP Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-gray-50 font-source">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg flex flex-col">
+            <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200 flex-shrink-0">
+                <div class="flex items-center">
+                    <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+                    <span class="ml-3 text-lg font-semibold text-secondary">DASHBOARD</span>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto" style="background: #FFF;">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="bg-primary bg-opacity-10 rounded-lg p-4 border-l-4 border-primary">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-semibold text-primary">WG3: Doing the Work</h4>
+                            <span class="text-xs text-primary font-medium">Week 7 of 13</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 54%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600">Day 43: Manage Project Artefacts</p>
+                    </div>
+                </div>
+
+                <nav class="mt-4">
+                    <div class="space-y-1">
+                        <a href="dashboard.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-tachometer-alt w-5 mr-3"></i>
+                            Dashboard
+                        </a>
+                        <a href="wg1-building-team.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-users w-5 mr-3 text-green-600"></i>
+                            WG1: Building A Team
+                        </a>
+                        <a href="wg2-starting-project.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-rocket w-5 mr-3 text-blue-600"></i>
+                            WG2: Starting the Project
+                        </a>
+                        <a href="#" class="flex items-center px-6 py-3 text-sm font-medium text-primary bg-primary bg-opacity-10 border-r-2 border-primary">
+                            <i class="fas fa-cogs w-5 mr-3 text-blue-600"></i>
+                            WG3: Doing the Work
+                        </a>
+                        <a href="wg4-keeping-track.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-chart-line w-5 mr-3 text-green-600"></i>
+                            WG4: Keeping on Track
+                        </a>
+                        <a href="wg5-focus-business.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-building w-5 mr-3 text-orange-600"></i>
+                            WG5: Focus on Business
+                        </a>
+                        <a href="practice-tests.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-clipboard-check w-5 mr-3 text-purple-600"></i>
+                            Practice Tests
+                        </a>
+                        <a href="resources.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-download w-5 mr-3"></i>
+                            Resources
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm border-b border-gray-200 flex-shrink-0">
+                <div class="flex items-center justify-between h-16 px-6">
+                    <div>
+                        <h1 class="text-xl font-semibold text-gray-900">WG3: Doing the Work</h1>
+                        <p class="text-sm text-gray-500">Process Domain - Weeks 6-8</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full font-medium">IN PROGRESS</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-6">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Current Lesson Highlight -->
+                    <div class="bg-gradient-to-r from-primary to-primary-dark rounded-xl p-6 text-white mb-8">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h2 class="text-2xl font-bold mb-2">Current Lesson</h2>
+                                <p class="text-primary-100 mb-4">Day 43: Manage Project Artefacts</p>
+                                <button class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                                    <i class="fas fa-play mr-2"></i>Continue Lesson
+                                </button>
+                            </div>
+                            <div class="hidden lg:block">
+                                <div class="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-play text-3xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lessons Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Assess & Manage Risks</h3>
+                                <i class="fas fa-check-circle text-blue-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Identify, analyze, and respond to project risks throughout execution.</p>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Execute for Value</h3>
+                                <i class="fas fa-check-circle text-blue-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Focus on delivering value through effective project execution strategies.</p>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Manage Communications</h3>
+                                <i class="fas fa-check-circle text-blue-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Ensure effective communication throughout project execution.</p>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Engage Stakeholders</h3>
+                                <i class="fas fa-check-circle text-blue-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Maintain stakeholder engagement during project execution phase.</p>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border-2 border-primary p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Manage Project Artefacts</h3>
+                                <i class="fas fa-play-circle text-primary text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Learn to effectively manage and maintain project documentation and artefacts.</p>
+                            <button class="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition-colors">
+                                <i class="fas fa-play mr-2"></i>Start Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 opacity-75">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Manage Project Changes</h3>
+                                <i class="fas fa-circle text-gray-400 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Handle change requests and maintain project scope integrity.</p>
+                            <button class="w-full bg-gray-400 text-white py-2 rounded-lg cursor-not-allowed">
+                                <i class="fas fa-lock mr-2"></i>Locked
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 opacity-75">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Manage Project Issues</h3>
+                                <i class="fas fa-circle text-gray-400 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Identify, track, and resolve project issues effectively.</p>
+                            <button class="w-full bg-gray-400 text-white py-2 rounded-lg cursor-not-allowed">
+                                <i class="fas fa-lock mr-2"></i>Locked
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 opacity-75">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Knowledge Transfer</h3>
+                                <i class="fas fa-circle text-gray-400 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Ensure effective knowledge transfer and manage suppliers.</p>
+                            <button class="w-full bg-gray-400 text-white py-2 rounded-lg cursor-not-allowed">
+                                <i class="fas fa-lock mr-2"></i>Locked
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

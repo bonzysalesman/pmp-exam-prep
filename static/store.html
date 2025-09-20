@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - PMP Exam Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-white font-source text-secondary leading-relaxed">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between border-b border-border-color">
+            <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+            <div class="hidden md:flex space-x-2">
+                <a href="landing.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-gray-300 transition-colors duration-300">Home</a>
+                <a href="#" class="text-primary font-medium text-lg px-4 py-2 border-r border-dotted border-gray-300">Courses</a>
+                <a href="about.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-gray-300 transition-colors duration-300">About</a>
+                <a href="contact.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 transition-colors duration-300">Contact</a>
+            </div>
+            <button class="bg-primary text-white px-6 py-3 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 font-light text-lg">Get Started</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h1 class="text-6xl font-black leading-tight text-secondary mb-6">Choose Your Path to PMP Success</h1>
+            <p class="text-xl font-light text-secondary">Flexible learning options designed to fit your schedule and budget</p>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Fundamentals</h3>
+                        <p class="text-gray-600 mb-6">Perfect for beginners starting their PMP journey</p>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">$199</div>
+                        <p class="text-gray-500">One-time payment</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">8 Core Modules</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">200+ Practice Questions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">Downloadable Resources</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">6 Months Access</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">Email Support</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full bg-gray-600 text-white py-3 px-6 rounded-lg hover:bg-gray-700 transition-colors">Get Started</button>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="bg-white border-2 border-blue-500 rounded-2xl p-8 relative hover:shadow-lg transition-shadow">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Professional</h3>
+                        <p class="text-gray-600 mb-6">Complete preparation with exam simulation</p>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">$399</div>
+                        <p class="text-gray-500">One-time payment</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">All Fundamentals Features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">Full Exam Simulation</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">1000+ Practice Questions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">Live Q&A Sessions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">12 Months Access</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">Priority Support</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">Get Started</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
+                        <p class="text-gray-600 mb-6">Complete mastery with 1-on-1 coaching</p>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">$699</div>
+                        <p class="text-gray-500">One-time payment</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">All Professional Features</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">1-on-1 Coaching Sessions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">Personalized Study Plan</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">Unlimited Practice Tests</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">Lifetime Access</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-green-500 mr-3">✓</span>
+                            <span class="text-gray-700">24/7 Premium Support</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Individual Courses -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Individual Courses</h2>
+                <p class="text-xl text-gray-600">Pick specific topics to focus your learning</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Project Integration Management</h3>
+                    <p class="text-gray-600 mb-4">Master the fundamentals of project integration and charter development.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-blue-600">$49</span>
+                        <span class="text-sm text-gray-500">8 lessons</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Enroll Now</button>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Project Scope Management</h3>
+                    <p class="text-gray-600 mb-4">Learn scope planning, definition, and control techniques.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-blue-600">$39</span>
+                        <span class="text-sm text-gray-500">6 lessons</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Enroll Now</button>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Project Schedule Management</h3>
+                    <p class="text-gray-600 mb-4">Master activity sequencing and schedule development.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-blue-600">$59</span>
+                        <span class="text-sm text-gray-500">10 lessons</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Enroll Now</button>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Project Cost Management</h3>
+                    <p class="text-gray-600 mb-4">Understand cost estimation and budget control.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-blue-600">$45</span>
+                        <span class="text-sm text-gray-500">7 lessons</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Enroll Now</button>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Risk Management</h3>
+                    <p class="text-gray-600 mb-4">Learn to identify, analyze, and respond to project risks.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-blue-600">$55</span>
+                        <span class="text-sm text-gray-500">9 lessons</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Enroll Now</button>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Agile & Hybrid Approaches</h3>
+                    <p class="text-gray-600 mb-4">Modern project management methodologies and frameworks.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-blue-600">$65</span>
+                        <span class="text-sm text-gray-500">12 lessons</span>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="bg-blue-50 rounded-2xl p-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">30-Day Money-Back Guarantee</h2>
+                <p class="text-lg text-gray-600 mb-6">
+                    We're confident in our courses. If you're not satisfied within 30 days, we'll refund your money, no questions asked.
+                </p>
+                <div class="flex items-center justify-center space-x-8 text-sm text-gray-600">
+                    <div class="flex items-center">
+                        <span class="text-green-500 mr-2">✓</span>
+                        <span>No Risk</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-green-500 mr-2">✓</span>
+                        <span>Full Refund</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-green-500 mr-2">✓</span>
+                        <span>No Questions Asked</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="mohlomi_institute_logo_black_to_white.png" alt="Mohlomi Institute" class="mb-4" style="width: 15rem;">
+                    <p class="text-gray-200 font-light">Empowering professionals with world-class PMP education and hands-on learning experiences.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Courses</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">PMP Fundamentals</a></li>
+                        <li><a href="#" class="hover:text-white">Exam Preparation</a></li>
+                        <li><a href="#" class="hover:text-white">Advanced Techniques</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 PMP Exam Prep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

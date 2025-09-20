@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMP Exam Prep - Master Project Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-white font-source text-secondary leading-relaxed">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between border-b border-border-color">
+            <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+            <div class="hidden md:flex space-x-2">
+                <a href="#" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-gray-300 transition-colors duration-300">Courses</a>
+                <a href="about.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-gray-300 transition-colors duration-300">About</a>
+                <a href="contact.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 transition-colors duration-300">Contact</a>
+            </div>
+            <button class="bg-primary text-white px-6 py-3 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 font-light text-lg">Get Started</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('http://localhost:8888/mi/wp-content/themes/understrap-child-1.2.0/images/pmp_one.jpeg'); mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 opacity-90"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-6xl xl:text-7xl font-black leading-tight text-secondary mb-6">
+                Master PMP with<br>
+                <span class="text-primary uppercase">Expert Guidance</span>
+            </h1>
+            <p class="text-xl font-light text-secondary mb-8 max-w-2xl mx-auto leading-normal">
+                Pass your PMP certification through comprehensive courses designed by industry experts. Join thousands of professionals worldwide.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <button class="bg-primary text-white px-8 py-3 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 text-lg font-light">Start Learning →</button>
+                <button class="border border-secondary text-secondary px-8 py-3 rounded-2xl hover:bg-secondary hover:text-white hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 text-lg font-light">▶ Watch Demo</button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
+                <div class="text-center">
+                    <div class="text-4xl font-light text-primary mb-2">5K+</div>
+                    <div class="text-secondary font-light">Students</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-light text-primary mb-2">95%</div>
+                    <div class="text-secondary font-light">Pass Rate</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-light text-primary mb-2">50+</div>
+                    <div class="text-secondary font-light">Countries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black uppercase text-primary mb-6 leading-tight">Featured Courses</h2>
+                <p class="text-xl font-light text-secondary">Start your PMP journey with our most popular and comprehensive courses</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white border border-border-color rounded-lg p-6 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div class="bg-blue-100 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">📚</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-2">PMP Fundamentals</h3>
+                    <p class="text-gray-600 font-light mb-4 leading-relaxed">Learn the core concepts of project management and build a strong foundation.</p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span class="font-light">8 weeks</span>
+                        <span>⭐ 4.8</span>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 font-light">Start Course →</button>
+                </div>
+
+                <div class="bg-white border border-border-color rounded-lg p-6 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div class="bg-green-100 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🎯</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-2">Exam Preparation</h3>
+                    <p class="text-gray-600 font-light mb-4 leading-relaxed">Intensive preparation with practice tests and exam strategies.</p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span class="font-light">12 weeks</span>
+                        <span>⭐ 4.9</span>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 font-light">Start Course →</button>
+                </div>
+
+                <div class="bg-white border border-border-color rounded-lg p-6 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div class="bg-purple-100 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🏆</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-secondary mb-2">Advanced Techniques</h3>
+                    <p class="text-gray-600 font-light mb-4 leading-relaxed">Master advanced project management methodologies and frameworks.</p>
+                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <span class="font-light">16 weeks</span>
+                        <span>⭐ 4.7</span>
+                    </div>
+                    <button class="w-full bg-primary text-white py-3 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 font-light">Start Course →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Numbers -->
+    <section class="py-20 bg-light-gray">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-black uppercase text-primary mb-6 leading-tight">Our Impact in Numbers</h2>
+            <p class="text-xl font-light text-secondary mb-16">See how we're transforming careers and advancing PMP education globally</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">5.0K+</div>
+                    <div class="text-gray-600">Active Students</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">50+</div>
+                    <div class="text-gray-600">Countries Reached</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">15K+</div>
+                    <div class="text-gray-600">Course Completions</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">95%</div>
+                    <div class="text-gray-600">Pass Rate</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">4.8</div>
+                    <div class="text-gray-600">Average Rating</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">24/7</div>
+                    <div class="text-gray-600">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
+                <p class="text-xl text-gray-600">Join thousands of professionals who have advanced their careers with our PMP courses</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white border border-gray-200 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-blue-600 font-semibold">SJ</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Sarah Johnson</div>
+                            <div class="text-sm text-gray-500">Project Manager</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"The course completely transformed my understanding of PM. The practical examples and clear explanations made complex concepts easy to grasp."</p>
+                    <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-green-600 font-semibold">MR</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Michael Rodriguez</div>
+                            <div class="text-sm text-gray-500">Senior Consultant</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Excellent curriculum that bridges theory and practice. I was able to apply what I learned immediately in my work projects."</p>
+                    <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-purple-600 font-semibold">ER</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Emily Rodriguez</div>
+                            <div class="text-sm text-gray-500">IT Director</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"The interactive format and real-world case studies made the learning experience engaging and practical for beginners and experts alike."</p>
+                    <div class="text-yellow-400">⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="mohlomi_institute_logo_black_to_white.png" alt="Mohlomi Institute" class="mb-4" style="width: 15rem;">
+                    <p class="text-gray-200 font-light">Empowering professionals with world-class PMP education and hands-on learning experiences.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Courses</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">PMP Fundamentals</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Exam Preparation</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Advanced Techniques</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Company</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="about.html" class="hover:text-white hover:underline transition-all duration-300">About Us</a></li>
+                        <li><a href="contact.html" class="hover:text-white hover:underline transition-all duration-300">Contact</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Resources</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Blog</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-white border-opacity-20 my-8">
+            <div class="text-center text-gray-200 font-light">
+                <p>&copy; 2024 PMP Exam Prep. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

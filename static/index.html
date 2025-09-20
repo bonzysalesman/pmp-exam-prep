@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMP Exam Prep - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg">
+            <div class="p-6 border-b">
+                <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+            </div>
+            <nav class="mt-6">
+                <a href="#" class="flex items-center px-6 py-3 text-gray-700 bg-blue-50 border-r-2 border-blue-500">
+                    <span class="ml-3">Dashboard</span>
+                </a>
+                <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50">
+                    <span class="ml-3">Courses</span>
+                </a>
+                <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50">
+                    <span class="ml-3">Practice Tests</span>
+                </a>
+                <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50">
+                    <span class="ml-3">Progress</span>
+                </a>
+                <a href="#" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50">
+                    <span class="ml-3">Resources</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-hidden">
+            <header class="bg-white shadow-sm border-b px-6 py-4">
+                <h1 class="text-2xl font-semibold text-gray-800">Dashboard</h1>
+            </header>
+            
+            <main class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-medium text-gray-900">Course Progress</h3>
+                        <p class="text-3xl font-bold text-blue-600 mt-2">75%</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-medium text-gray-900">Practice Tests</h3>
+                        <p class="text-3xl font-bold text-green-600 mt-2">12/20</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-medium text-gray-900">Study Hours</h3>
+                        <p class="text-3xl font-bold text-purple-600 mt-2">45h</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b">
+                        <h2 class="text-xl font-semibold text-gray-800">Recent Activity</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between py-3 border-b">
+                                <div>
+                                    <p class="font-medium text-gray-900">Project Integration Management</p>
+                                    <p class="text-sm text-gray-500">Completed lesson 3 of 8</p>
+                                </div>
+                                <span class="text-sm text-gray-400">2 hours ago</span>
+                            </div>
+                            <div class="flex items-center justify-between py-3 border-b">
+                                <div>
+                                    <p class="font-medium text-gray-900">Practice Test #5</p>
+                                    <p class="text-sm text-gray-500">Score: 85%</p>
+                                </div>
+                                <span class="text-sm text-gray-400">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

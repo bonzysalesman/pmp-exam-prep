@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PMP Learning</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#5b28b3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="PMP Prep">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="pmp-exam-prep-logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-gray-50 font-source">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 lg:block lg:flex-shrink-0 flex flex-col">
+        <div class="flex items-center justify-between h-16 px-4 sm:px-6 border-b border-gray-200 flex-shrink-0">
+            <div class="flex items-center">
+                <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-16 sm:w-20 h-auto">
+                <span class="ml-2 sm:ml-3 text-base sm:text-lg font-semibold text-secondary hidden sm:block">DASHBOARD</span>
+            </div>
+            <button id="closeSidebar" class="lg:hidden text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto" style="background: #FFF;">
+            <!-- Current Course Progress -->
+        <div class="px-6 py-4 border-b border-gray-200">
+            <div class="bg-primary bg-opacity-10 rounded-lg p-4 border-l-4 border-primary">
+                <div class="flex items-center justify-between mb-2">
+                    <h4 class="text-sm font-semibold text-primary">WG3: Doing the Work</h4>
+                    <span class="text-xs text-primary font-medium">Week 7 of 13</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                    <div class="bg-primary h-2 rounded-full" style="width: 54%"></div>
+                </div>
+                <p class="text-xs text-gray-600">Day 43: Manage Project Artefacts</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="mt-4">
+            <div class="space-y-1">
+                <a href="#" class="flex items-center px-6 py-3 text-sm font-medium text-primary bg-primary bg-opacity-10 border-r-2 border-primary">
+                    <i class="fas fa-tachometer-alt w-5 mr-3"></i>
+                    Dashboard
+                </a>
+                <a href="wg1-building-team.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                    <i class="fas fa-users w-5 mr-3 text-green-600"></i>
+                    WG1: Building A Team
+                </a>
+                <a href="wg2-starting-project.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                    <i class="fas fa-rocket w-5 mr-3 text-blue-600"></i>
+                    WG2: Starting the Project
+                </a>
+                <a href="wg3-doing-work.html" class="flex items-center px-6 py-3 text-sm font-medium text-primary bg-gray-50">
+                    <i class="fas fa-cogs w-5 mr-3 text-blue-600"></i>
+                    WG3: Doing the Work
+                </a>
+                <a href="wg4-keeping-track.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                    <i class="fas fa-chart-line w-5 mr-3 text-green-600"></i>
+                    WG4: Keeping on Track
+                </a>
+                <a href="wg5-focus-business.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                    <i class="fas fa-building w-5 mr-3 text-orange-600"></i>
+                    WG5: Focus on Business
+                </a>
+                <a href="#" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                    <i class="fas fa-clipboard-check w-5 mr-3 text-purple-600"></i>
+                    Practice Tests
+                </a>
+                <a href="#" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                    <i class="fas fa-download w-5 mr-3"></i>
+                    Resources
+                </a>
+            </div>
+
+            <!-- Study Stats -->
+            <div class="px-6 mt-8 pt-6 border-t border-gray-200 pb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Study Stats</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-600">Study Streak</span>
+                        <span class="text-sm font-semibold text-success flex items-center">
+                            <i class="fas fa-fire text-orange-500 mr-1"></i>12 days
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-600">This Week</span>
+                        <span class="text-sm font-semibold text-primary">8.5h</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-600">Overall</span>
+                        <span class="text-sm font-semibold text-primary">54%</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Top Header -->
+        <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40 flex-shrink-0">
+            <div class="flex items-center justify-between h-16 px-4 sm:px-6">
+                <div class="flex items-center">
+                    <button id="openSidebar" class="lg:hidden text-gray-500 hover:text-gray-700 mr-3 sm:mr-4">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <div>
+                        <p class="text-sm text-gray-500">Welcome back, bonzysalesman</p>
+                    </div>
+                </div>
+                
+                <!-- In-page Navigation -->
+                <nav class="hidden md:flex space-x-6 lg:space-x-8">
+                    <a href="#overview" class="text-primary border-b-2 border-primary pb-2 text-sm font-medium">Overview</a>
+                    <a href="#progress" class="text-gray-500 hover:text-primary pb-2 text-sm font-medium transition-colors">Progress</a>
+                    <a href="#activity" class="text-gray-500 hover:text-primary pb-2 text-sm font-medium transition-colors">Activity</a>
+                </nav>
+
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <button class="text-gray-500 hover:text-gray-700 relative">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                    </button>
+                    <div class="relative">
+                        <button class="w-8 h-8 bg-primary rounded-full flex items-center justify-center" onclick="toggleUserDropdown()">
+                            <span class="text-white text-sm font-medium">B</span>
+                        </button>
+                        <div id="userAccountDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">Manage Account</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Account Settings</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Billing</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <hr class="my-1">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-b-lg">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-6">
+            <!-- Continue Learning Hero Section -->
+            <section id="overview" class="mb-8">
+                <div class="bg-gradient-to-r from-primary to-primary-dark rounded-xl p-8 text-white mb-8">
+                    <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                            <h2 class="text-3xl font-bold mb-2 uppercase" style="line-height: 1.1618;">Continue Learning</h2>
+                            <p class="text-primary-100 mb-1">Risk Management Fundamentals</p>
+                            <p class="text-sm text-primary-200 mb-6">Lesson 7: Risk Identification Techniques • 12 min remaining</p>
+                            <div class="flex items-center space-x-4">
+                                <button class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center">
+                                    <i class="fas fa-play mr-2"></i>Resume Lesson
+                                </button>
+                                <button class="border border-white border-opacity-30 text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-colors">
+                                    View Course
+                                </button>
+                            </div>
+                        </div>
+                        <div class="hidden lg:block ml-8">
+                            <div class="w-32 h-32 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-play text-4xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Domain Progress Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-users text-green-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-900">People Domain</h3>
+                            </div>
+                            <span class="text-2xl font-bold text-green-600">42%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                            <div class="bg-green-600 h-2 rounded-full" style="width: 42%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">8 of 12 lessons completed</p>
+                        <p class="text-xs text-gray-500 mt-1">Leading teams, managing conflict</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-cogs text-blue-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-900">Process Domain</h3>
+                            </div>
+                            <span class="text-2xl font-bold text-blue-600">50%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 50%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">12 of 18 lessons completed</p>
+                        <p class="text-xs text-gray-500 mt-1">Technical project management</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-building text-orange-600"></i>
+                                </div>
+                                <h3 class="font-semibold text-gray-900">Business Environment</h3>
+                            </div>
+                            <span class="text-2xl font-bold text-orange-600">8%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
+                            <div class="bg-orange-600 h-2 rounded-full" style="width: 8%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">2 of 4 lessons completed</p>
+                        <p class="text-xs text-gray-500 mt-1">Strategy alignment, compliance</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progress" class="mb-6 lg:mb-8">
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+                    <!-- Work Groups Progress -->
+                    <div class="bg-white rounded-lg lg:rounded-xl shadow-sm border border-gray-200 p-4 lg:p-6">
+                        <h3 class="text-base lg:text-lg font-semibold text-gray-900 mb-4 lg:mb-6">Work Groups Progress</h3>
+                        
+                        <!-- WG1: Building A Team -->
+                        <div class="border border-gray-200 rounded-lg mb-3">
+                            <button class="w-full px-4 py-3 text-left flex items-center justify-between bg-green-50 hover:bg-green-100 rounded-lg" onclick="toggleAccordion('wg1')">
+                                <div class="flex items-center">
+                                    <i class="fas fa-users text-green-600 mr-3"></i>
+                                    <span class="font-medium text-gray-900">WG1: Building A Team</span>
+                                    <span class="ml-2 text-xs bg-green-600 text-white px-2 py-1 rounded">COMPLETED</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-gray-400" id="wg1-icon"></i>
+                            </button>
+                            <div id="wg1-content" class="hidden px-4 pb-3">
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i>Build A Team</div>
+                                    <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i>Define Team Ground Rules</div>
+                                    <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i>Negotiate Project Agreements</div>
+                                    <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i>Empower Team Members & Stakeholders</div>
+                                    <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i>Ensure Adequate Training</div>
+                                    <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i>Engage Virtual Teams</div>
+                                    <div class="flex items-center text-green-600"><i class="fas fa-check-circle mr-2"></i>Address Impediments & Blockers</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WG2: Starting the Project -->
+                        <div class="border border-gray-200 rounded-lg mb-3">
+                            <button class="w-full px-4 py-3 text-left flex items-center justify-between bg-blue-50 hover:bg-blue-100 rounded-lg" onclick="toggleAccordion('wg2')">
+                                <div class="flex items-center">
+                                    <i class="fas fa-rocket text-blue-600 mr-3"></i>
+                                    <span class="font-medium text-gray-900">WG2: Starting the Project</span>
+                                    <span class="ml-2 text-xs bg-blue-600 text-white px-2 py-1 rounded">COMPLETED</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-gray-400" id="wg2-icon"></i>
+                            </button>
+                            <div id="wg2-content" class="hidden px-4 pb-3">
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Determine Project Methodology</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Plan and Manage Scope</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Plan & Manage Budget/Resources</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Manage Project Artefacts</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Plan & Manage Schedule</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Plan & Manage Quality</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Integrate Planning Activities</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Plan & Manage Procurement</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Establish Governance & Plan Closure</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WG3: Doing the Work -->
+                        <div class="border-2 border-primary rounded-lg mb-3">
+                            <button class="w-full px-4 py-3 text-left flex items-center justify-between bg-primary bg-opacity-10 hover:bg-primary hover:bg-opacity-20 rounded-lg" onclick="toggleAccordion('wg3')">
+                                <div class="flex items-center">
+                                    <i class="fas fa-cogs text-primary mr-3"></i>
+                                    <span class="font-medium text-gray-900">WG3: Doing the Work</span>
+                                    <span class="ml-2 text-xs bg-primary text-white px-2 py-1 rounded">CURRENT</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-gray-400" id="wg3-icon"></i>
+                            </button>
+                            <div id="wg3-content" class="px-4 pb-3">
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Assess & Manage Risks</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Execute for Value</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Manage Communications</div>
+                                    <div class="flex items-center text-blue-600"><i class="fas fa-check-circle mr-2"></i>Engage Stakeholders</div>
+                                    <div class="flex items-center text-primary font-medium"><i class="fas fa-play-circle mr-2"></i>Manage Project Artefacts</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Manage Project Changes</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Manage Project Issues</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Ensure Knowledge Transfer</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Manage Suppliers</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WG4: Keeping on Track -->
+                        <div class="border border-gray-200 rounded-lg mb-3">
+                            <button class="w-full px-4 py-3 text-left flex items-center justify-between bg-gray-50 hover:bg-gray-100 rounded-lg" onclick="toggleAccordion('wg4')">
+                                <div class="flex items-center">
+                                    <i class="fas fa-chart-line text-gray-400 mr-3"></i>
+                                    <span class="font-medium text-gray-900">WG4: Keeping on Track</span>
+                                    <span class="ml-2 text-xs bg-gray-400 text-white px-2 py-1 rounded">UPCOMING</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-gray-400" id="wg4-icon"></i>
+                            </button>
+                            <div id="wg4-content" class="hidden px-4 pb-3">
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Lead A Team</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Support Team Performance</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Collaborate with Stakeholders</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Manage Conflict</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Mentor Relevant Stakeholders</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Build Shared Understanding</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Promote Team Performance through EI</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WG5: Focus on the Business -->
+                        <div class="border border-gray-200 rounded-lg">
+                            <button class="w-full px-4 py-3 text-left flex items-center justify-between bg-gray-50 hover:bg-gray-100 rounded-lg" onclick="toggleAccordion('wg5')">
+                                <div class="flex items-center">
+                                    <i class="fas fa-building text-gray-400 mr-3"></i>
+                                    <span class="font-medium text-gray-900">WG5: Focus on the Business</span>
+                                    <span class="ml-2 text-xs bg-gray-400 text-white px-2 py-1 rounded">UPCOMING</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-gray-400" id="wg5-icon"></i>
+                            </button>
+                            <div id="wg5-content" class="hidden px-4 pb-3">
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Plan & Manage Compliance</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Evaluate & Deliver Benefits/Value</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Evaluate External Changes</div>
+                                    <div class="flex items-center text-gray-400"><i class="fas fa-circle mr-2"></i>Support Organisational Change</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Statistics -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-6">Study Statistics</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-primary mb-1">47.5</div>
+                                <div class="text-sm text-gray-600">Hours Studied</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-success mb-1">22</div>
+                                <div class="text-sm text-gray-600">Lessons Done</div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Practice Tests</span>
+                                <span class="font-semibold text-gray-900">5 completed</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Average Score</span>
+                                <span class="font-semibold text-success">87%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Exam Readiness</span>
+                                <span class="font-semibold text-primary">68%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section id="activity">
+                <div class="bg-white rounded-lg lg:rounded-xl shadow-sm border border-gray-200 p-4 lg:p-6">
+                    <div class="flex items-center justify-between mb-4 lg:mb-6">
+                        <h3 class="text-base lg:text-lg font-semibold text-gray-900">Recent Activity</h3>
+                        <button class="text-xs lg:text-sm text-primary hover:text-primary-dark font-medium">View All</button>
+                    </div>
+                    <div class="space-y-3 lg:space-y-4">
+                        <div class="flex items-start space-x-3 lg:space-x-4">
+                            <div class="w-8 lg:w-10 h-8 lg:h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-play text-white text-xs lg:text-sm"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs lg:text-sm font-medium text-gray-900">Completed: Risk Identification Techniques</p>
+                                <p class="text-xs lg:text-sm text-gray-600">Risk Management Fundamentals</p>
+                                <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                            </div>
+                            <div class="text-xs lg:text-sm font-medium text-success">+15 XP</div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3 lg:space-x-4">
+                            <div class="w-8 lg:w-10 h-8 lg:h-10 bg-success rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-certificate text-white text-xs lg:text-sm"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs lg:text-sm font-medium text-gray-900">Earned Certificate: Agile Project Management</p>
+                                <p class="text-xs lg:text-sm text-gray-600">Score: 95%</p>
+                                <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+                            </div>
+                            <div class="text-xs lg:text-sm font-medium text-success">+50 XP</div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3 lg:space-x-4">
+                            <div class="w-8 lg:w-10 h-8 lg:h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-users text-white text-xs lg:text-sm"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs lg:text-sm font-medium text-gray-900">Joined Study Group Discussion</p>
+                                <p class="text-xs lg:text-sm text-gray-600">Topic: Stakeholder Management</p>
+                                <p class="text-xs text-gray-500 mt-1">3 days ago</p>
+                            </div>
+                            <div class="text-xs lg:text-sm font-medium text-primary">+5 XP</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="mt-8 lg:mt-12 pt-6 lg:pt-8 border-t border-gray-200">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8 mb-6">
+                    <div class="md:col-span-2">
+                        <img src="mohlomi_institute_logo_black_to_white.png" alt="Mohlomi Institute" class="h-8 lg:h-10 mb-3">
+                        <p class="text-xs lg:text-sm text-gray-600">Mohlomi Institute provides focused, practical, and ethical training solutions for project management professionals.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xs lg:text-sm font-semibold text-gray-900 uppercase tracking-wide mb-3">Quick Links</h3>
+                        <ul class="space-y-2 text-xs lg:text-sm text-gray-600">
+                            <li><a href="dashboard.html" class="hover:text-primary transition-colors">Dashboard</a></li>
+                            <li><a href="wg3-doing-work.html" class="hover:text-primary transition-colors">Current Course</a></li>
+                            <li><a href="practice-tests.html" class="hover:text-primary transition-colors">Practice Tests</a></li>
+                            <li><a href="resources.html" class="hover:text-primary transition-colors">Resources</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs lg:text-sm font-semibold text-gray-900 uppercase tracking-wide mb-3">Support</h3>
+                        <ul class="space-y-2 text-xs lg:text-sm text-gray-600">
+                            <li><a href="#" class="hover:text-primary transition-colors">Help Center</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Contact Us</a></li>
+                            <li><a href="community.html" class="hover:text-primary transition-colors">Community</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pt-4 lg:pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center">
+                    <p class="text-xs text-gray-500 mb-2 sm:mb-0">© 2025 Mohlomi Institute. All rights reserved.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-linkedin text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-50">
+        <div class="grid grid-cols-4 gap-1">
+            <a href="dashboard.html" class="flex flex-col items-center py-2 px-1 text-primary">
+                <i class="fas fa-tachometer-alt text-lg mb-1"></i>
+                <span class="text-xs font-medium">Dashboard</span>
+            </a>
+            <a href="wg3-doing-work.html" class="flex flex-col items-center py-2 px-1 text-gray-600">
+                <i class="fas fa-cogs text-lg mb-1"></i>
+                <span class="text-xs">Current</span>
+            </a>
+            <a href="practice-tests.html" class="flex flex-col items-center py-2 px-1 text-gray-600">
+                <i class="fas fa-clipboard-check text-lg mb-1"></i>
+                <span class="text-xs">Tests</span>
+            </a>
+            <a href="resources.html" class="flex flex-col items-center py-2 px-1 text-gray-600">
+                <i class="fas fa-download text-lg mb-1"></i>
+                <span class="text-xs">Resources</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const openSidebar = document.getElementById('openSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        function showSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+        }
+
+        function hideSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        }
+
+        openSidebar.addEventListener('click', showSidebar);
+        closeSidebar.addEventListener('click', hideSidebar);
+        sidebarOverlay.addEventListener('click', hideSidebar);
+
+        // User account dropdown
+        function toggleUserDropdown() {
+            document.getElementById('userAccountDropdown').classList.toggle('hidden');
+        }
+
+        // Work Groups accordion
+        function toggleAccordion(wgId) {
+            const content = document.getElementById(wgId + '-content');
+            const icon = document.getElementById(wgId + '-icon');
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userAccountDropdown');
+            const button = event.target.closest('button');
+            if (!button || !button.onclick || button.onclick.toString().indexOf('toggleUserDropdown') === -1) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // In-page navigation
+        document.querySelectorAll('header nav a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('header nav a[href^="#"]').forEach(l => {
+                    l.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                    l.classList.add('text-gray-500', 'hover:text-primary');
+                });
+                this.classList.remove('text-gray-500', 'hover:text-primary');
+                this.classList.add('text-primary', 'border-b-2', 'border-primary');
+                
+                // Smooth scroll to section
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button
+            const installBtn = document.createElement('button');
+            installBtn.innerHTML = '<i class="fas fa-download mr-2"></i>Install App';
+            installBtn.className = 'fixed bottom-4 right-4 bg-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-primary-dark transition-colors z-50';
+            installBtn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        installBtn.remove();
+                    }
+                    deferredPrompt = null;
+                });
+            });
+            document.body.appendChild(installBtn);
+        });
+    </script>
+</body>
+</html>

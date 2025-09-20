@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Learning - PMP Exam Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-light-gray font-source text-secondary leading-relaxed">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between border-b border-border-color">
+            <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+            <div class="hidden md:flex space-x-8">
+                <a href="pmp-landing-alt.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Home</a>
+                <a href="browse-courses.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Courses</a>
+                <a href="#" class="text-primary font-medium text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2">My Learning</a>
+                <a href="resources.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Resources</a>
+                <a href="community.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Community</a>
+                <a href="about.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 transition-colors duration-300">About</a>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="relative">
+                    <button class="flex items-center text-secondary hover:text-primary px-3 py-2 transition-colors duration-300" onclick="toggleDropdown()">
+                        <span class="font-bold">MY ACCOUNT</span>
+                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </button>
+                    <div id="userDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">
+                            <i class="fas fa-tachometer-alt w-5 mr-3 text-primary"></i>My Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-chart-line w-5 mr-3 text-primary"></i>Progress Tracker
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-bullseye w-5 mr-3 text-primary"></i>Current Course
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-users w-5 mr-3 text-primary"></i>Study Group
+                        </a>
+                        <hr class="my-1">
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-cog w-5 mr-3 text-gray-400"></i>Settings
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-b-lg">
+                            <i class="fas fa-sign-out-alt w-5 mr-3 text-gray-400"></i>Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-secondary mb-2">Welcome back, bonzysalesman!</h1>
+            <p class="text-gray-600">Continue your PMP® certification journey. You're making great progress!</p>
+        </div>
+
+        <!-- Continue Learning -->
+        <div class="bg-white rounded-lg shadow-sm border border-border-color p-6 mb-8">
+            <h2 class="text-xl font-semibold text-secondary mb-4">Continue Learning</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-r from-primary to-primary-dark rounded-lg p-6 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold">Risk Management Fundamentals</h3>
+                        <i class="fas fa-play-circle text-2xl"></i>
+                    </div>
+                    <p class="text-sm opacity-90 mb-4">Learn to identify, analyze, and respond to project risks effectively.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs">Lesson 7 of 12</span>
+                        <button class="bg-white text-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">Continue</button>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-600">Overall Progress</span>
+                        <span class="text-sm font-medium text-primary">68%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-primary h-2 rounded-full" style="width: 68%"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div>
+                            <div class="text-2xl font-bold text-primary">47</div>
+                            <div class="text-xs text-gray-600">Hours Studied</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-success">22</div>
+                            <div class="text-xs text-gray-600">Lessons Completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Courses -->
+        <div class="bg-white rounded-lg shadow-sm border border-border-color p-6 mb-8">
+            <h2 class="text-xl font-semibold text-secondary mb-6">My Courses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="border border-border-color rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-secondary">PMP® Fundamentals</h3>
+                        <span class="bg-success text-white px-2 py-1 rounded text-xs">ACTIVE</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Master the core concepts of project management</p>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs text-gray-500">Progress</span>
+                        <span class="text-xs font-medium text-primary">75%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1 mb-3">
+                        <div class="bg-primary h-1 rounded-full" style="width: 75%"></div>
+                    </div>
+                    <button class="w-full bg-primary text-white py-2 rounded-lg text-sm hover:bg-primary-dark transition-colors">Continue Course</button>
+                </div>
+
+                <div class="border border-border-color rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-secondary">Agile Project Management</h3>
+                        <span class="bg-gray-400 text-white px-2 py-1 rounded text-xs">COMPLETED</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-3">Learn agile methodologies and hybrid approaches</p>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs text-gray-500">Progress</span>
+                        <span class="text-xs font-medium text-success">100%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1 mb-3">
+                        <div class="bg-success h-1 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <button class="w-full bg-gray-600 text-white py-2 rounded-lg text-sm hover:bg-gray-700 transition-colors">View Certificate</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="bg-white rounded-lg shadow-sm border border-border-color p-6">
+            <h2 class="text-xl font-semibold text-secondary mb-6">Recent Activity</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center">
+                        <i class="fas fa-play-circle text-primary mr-3"></i>
+                        <div>
+                            <p class="font-medium text-secondary">Completed: Risk Identification Techniques</p>
+                            <p class="text-sm text-gray-500">Risk Management Fundamentals</p>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-400">2 hours ago</span>
+                </div>
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center">
+                        <i class="fas fa-certificate text-success mr-3"></i>
+                        <div>
+                            <p class="font-medium text-secondary">Earned Certificate: Agile Project Management</p>
+                            <p class="text-sm text-gray-500">Score: 95%</p>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-400">1 day ago</span>
+                </div>
+                <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center">
+                        <i class="fas fa-users text-primary mr-3"></i>
+                        <div>
+                            <p class="font-medium text-secondary">Joined Study Group Discussion</p>
+                            <p class="text-sm text-gray-500">Topic: Stakeholder Management</p>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-400">3 days ago</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-200 py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="mohlomi_institute_logo_black_to_white.png" alt="Mohlomi Institute" class="mb-4" style="width: 15rem;">
+                    <p class="text-gray-200 font-light">Mohlomi Institute provides focused, practical, and ethical training solutions for project management professionals.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Home</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Browse Courses</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">My Learning</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Support</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Live Chat</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Connect</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-twitter text-xl"></i></a>
+                    </div>
+                    <p class="text-gray-200 font-light text-sm"><i class="fas fa-envelope me-2"></i>info@mohlomiinstitute.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById('userDropdown').classList.toggle('hidden');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            const button = event.target.closest('button');
+            if (!button || !button.onclick) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

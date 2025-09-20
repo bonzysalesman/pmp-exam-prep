@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WG4: Keeping on Track - PMP Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-gray-50 font-source">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg flex flex-col">
+            <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200 flex-shrink-0">
+                <div class="flex items-center">
+                    <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+                    <span class="ml-3 text-lg font-semibold text-secondary">DASHBOARD</span>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto" style="background: #FFF;">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="bg-gray-100 rounded-lg p-4 border-l-4 border-gray-400">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-semibold text-gray-600">WG4: Keeping on Track</h4>
+                            <span class="text-xs text-gray-600 font-medium">UPCOMING</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="bg-gray-400 h-2 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600">Starts Week 9</p>
+                    </div>
+                </div>
+
+                <nav class="mt-4">
+                    <div class="space-y-1">
+                        <a href="dashboard.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-tachometer-alt w-5 mr-3"></i>
+                            Dashboard
+                        </a>
+                        <a href="wg1-building-team.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-users w-5 mr-3 text-green-600"></i>
+                            WG1: Building A Team
+                        </a>
+                        <a href="wg2-starting-project.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-rocket w-5 mr-3 text-blue-600"></i>
+                            WG2: Starting the Project
+                        </a>
+                        <a href="wg3-doing-work.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-cogs w-5 mr-3 text-blue-600"></i>
+                            WG3: Doing the Work
+                        </a>
+                        <a href="#" class="flex items-center px-6 py-3 text-sm font-medium text-primary bg-primary bg-opacity-10 border-r-2 border-primary">
+                            <i class="fas fa-chart-line w-5 mr-3 text-green-600"></i>
+                            WG4: Keeping on Track
+                        </a>
+                        <a href="wg5-focus-business.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-building w-5 mr-3 text-orange-600"></i>
+                            WG5: Focus on Business
+                        </a>
+                        <a href="practice-tests.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-clipboard-check w-5 mr-3 text-purple-600"></i>
+                            Practice Tests
+                        </a>
+                        <a href="resources.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-download w-5 mr-3"></i>
+                            Resources
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm border-b border-gray-200 flex-shrink-0">
+                <div class="flex items-center justify-between h-16 px-6">
+                    <div>
+                        <h1 class="text-xl font-semibold text-gray-900">WG4: Keeping on Track</h1>
+                        <p class="text-sm text-gray-500">People Domain - Weeks 9-10</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium">UPCOMING</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center py-20">
+                        <i class="fas fa-chart-line text-6xl text-gray-400 mb-6"></i>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">WG4: Keeping on Track</h2>
+                        <p class="text-gray-600 mb-8">This Work Group focuses on team leadership and stakeholder collaboration.</p>
+                        <div class="bg-gray-50 rounded-lg p-6 max-w-md mx-auto">
+                            <p class="text-gray-600">Available starting Week 9 (November 2025)</p>
+                            <p class="text-sm text-gray-500 mt-2">Complete WG3 to unlock this section</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

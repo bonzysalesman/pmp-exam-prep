@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Courses - PMP Exam Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-white font-source text-secondary leading-relaxed">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between border-b border-border-color">
+            <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+            <div class="hidden md:flex space-x-8">
+                <a href="pmp-landing-alt.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Home</a>
+                <a href="#" class="text-primary font-medium text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2">Courses</a>
+                <a href="my-learning.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">My Learning</a>
+                <a href="resources.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Resources</a>
+                <a href="community.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Community</a>
+                <a href="about.html" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 transition-colors duration-300">About</a>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="relative">
+                    <button class="flex items-center text-secondary hover:text-primary px-3 py-2 transition-colors duration-300" onclick="toggleDropdown()">
+                        <span class="font-bold">MY ACCOUNT</span>
+                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </button>
+                    <div id="userDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">
+                            <i class="fas fa-tachometer-alt w-5 mr-3 text-primary"></i>My Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-chart-line w-5 mr-3 text-primary"></i>Progress Tracker
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-bullseye w-5 mr-3 text-primary"></i>Current Course
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-users w-5 mr-3 text-primary"></i>Study Group
+                        </a>
+                        <hr class="my-1">
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-cog w-5 mr-3 text-gray-400"></i>Settings
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-b-lg">
+                            <i class="fas fa-sign-out-alt w-5 mr-3 text-gray-400"></i>Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-16">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-4xl font-black text-secondary mb-4">Browse PMP® Courses</h1>
+            <p class="text-xl font-light text-secondary max-w-2xl mx-auto">Choose from our comprehensive collection of PMP® certification courses designed for every learning style and schedule.</p>
+        </div>
+    </section>
+
+    <!-- Course Categories -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white border border-border-color rounded-lg p-6 text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-graduation-cap text-4xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-semibold text-secondary mb-2">Beginner Courses</h3>
+                    <p class="text-gray-600 font-light mb-4">Start your PMP® journey with foundational knowledge</p>
+                    <span class="text-sm text-primary font-medium">3 Courses Available</span>
+                </div>
+                <div class="bg-white border border-border-color rounded-lg p-6 text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-chart-line text-4xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-semibold text-secondary mb-2">Intermediate</h3>
+                    <p class="text-gray-600 font-light mb-4">Build on your project management experience</p>
+                    <span class="text-sm text-primary font-medium">5 Courses Available</span>
+                </div>
+                <div class="bg-white border border-border-color rounded-lg p-6 text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-trophy text-4xl text-primary mb-4"></i>
+                    <h3 class="text-xl font-semibold text-secondary mb-2">Exam Prep</h3>
+                    <p class="text-gray-600 font-light mb-4">Intensive preparation for PMP® certification</p>
+                    <span class="text-sm text-primary font-medium">2 Courses Available</span>
+                </div>
+            </div>
+
+            <!-- Course Listing -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white border border-border-color rounded-lg overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-primary to-primary-dark"></div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-primary text-white px-2 py-1 rounded text-xs font-medium">BEGINNER</span>
+                            <span class="text-sm text-gray-500">8 weeks</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-secondary mb-2">PMP® Fundamentals</h3>
+                        <p class="text-gray-600 font-light mb-4">Master the core concepts of project management and build a strong foundation for PMP® certification.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-sm text-gray-600">(4.8)</span>
+                            </div>
+                            <span class="text-2xl font-bold text-primary">$199</span>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary-dark transition-colors duration-300">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-border-color rounded-lg overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-success to-green-600"></div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-success text-white px-2 py-1 rounded text-xs font-medium">EXAM PREP</span>
+                            <span class="text-sm text-gray-500">12 weeks</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-secondary mb-2">Complete PMP® Exam Preparation</h3>
+                        <p class="text-gray-600 font-light mb-4">Comprehensive exam preparation with practice tests, study guides, and expert guidance.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-sm text-gray-600">(4.9)</span>
+                            </div>
+                            <span class="text-2xl font-bold text-primary">$399</span>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-primary-dark transition-colors duration-300">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="mohlomi_institute_logo_black_to_white.png" alt="Mohlomi Institute" class="mb-4" style="width: 15rem;">
+                    <p class="text-gray-200 font-light">Mohlomi Institute provides focused, practical, and ethical training solutions for project management professionals.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Home</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Browse Courses</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">My Learning</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Resources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Support</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Live Chat</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Connect</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-twitter text-xl"></i></a>
+                    </div>
+                    <p class="text-gray-200 font-light text-sm"><i class="fas fa-envelope me-2"></i>info@mohlomiinstitute.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById('userDropdown').classList.toggle('hidden');
+        }
+        
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            const button = event.target.closest('button');
+            if (!button || !button.onclick) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

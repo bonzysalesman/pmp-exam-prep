@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMP Exam Preparation Guide & Study Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-white font-source text-secondary leading-relaxed">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between border-b border-border-color">
+            <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="text-primary font-medium text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2">Home</a>
+                <a href="#" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Courses</a>
+                <a href="#" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">My Learning</a>
+                <a href="#" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Resources</a>
+                <a href="#" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 border-r border-dotted border-black border-opacity-10 pr-2 transition-colors duration-300">Community</a>
+                <a href="#" class="text-secondary hover:text-primary font-light text-lg px-4 py-2 transition-colors duration-300">About</a>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="relative">
+                    <button class="flex items-center text-secondary hover:text-primary px-3 py-2 transition-colors duration-300" onclick="toggleDropdown()">
+                        <span class="font-bold">MY ACCOUNT</span>
+                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </button>
+                    <div id="userDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-t-lg">
+                            <i class="fas fa-tachometer-alt w-5 mr-3 text-primary"></i>My Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-chart-line w-5 mr-3 text-primary"></i>Progress Tracker
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-bullseye w-5 mr-3 text-primary"></i>Current Course
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-users w-5 mr-3 text-primary"></i>Study Group
+                        </a>
+                        <hr class="my-1">
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-cog w-5 mr-3 text-gray-400"></i>Settings
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-b-lg">
+                            <i class="fas fa-sign-out-alt w-5 mr-3 text-gray-400"></i>Logout
+                        </a>
+                    </div>
+                </div>
+                <a href="#pricing-offers" class="bg-primary text-white px-6 py-2 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 font-light">
+                    <i class="fas fa-rocket me-1"></i> Get PMP® Ready
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('http://localhost:8888/mi/wp-content/themes/understrap-child-1.2.0/images/pmp_one.jpeg'); mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 opacity-90"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+            <h1 class="text-5xl xl:text-6xl font-black leading-tight text-secondary mb-6 uppercase" style="line-height: 1.1618;">
+                Pass Your PMP® Exam the First Time: 
+                <span class="text-primary">Practical, ECO-Focused Prep</span>
+            </h1>
+            <p class="text-xl font-light text-secondary mb-8 max-w-2xl mx-auto leading-normal">
+                Stop wasting time and money. Get the clear, structured guidance you need, based *directly* on the official PMP® Exam Content Outline (ECO). Designed for serious first-time passers by a fellow PMP® candidate.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <a href="#pricing-offers" class="bg-primary text-white px-8 py-3 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 text-lg font-light">Get the Study Guide</a>
+                <a href="#study-group" class="border border-secondary text-secondary px-8 py-3 rounded-2xl hover:bg-secondary hover:text-white hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 text-lg font-light">Join the Study Group</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h2 class="text-4xl font-black uppercase text-primary mb-6 leading-tight">Stop Guessing What to Study. Start Preparing Effectively.</h2>
+                    <p class="text-lg font-light text-secondary mb-6 leading-relaxed">
+                        Are you lost in a sea of PMP® prep materials, unsure what really matters for the exam? Many candidates waste valuable time on outdated information or struggle to connect theory to the exam's situational questions.
+                    </p>
+                    <p class="text-lg font-light text-secondary leading-relaxed">
+                        This guide cuts through the noise, created out of the need for a clear, affordable path focused *only* on what the exam tests. We focus exclusively on the official PMP® Exam Content Outline (ECO) – the exact blueprint for the exam.
+                    </p>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <img src="http://localhost:8888/mi/wp-content/themes/understrap-child-1.2.0/images/543.jpeg" class="w-full rounded-2xl shadow-lg" alt="Project manager looking thoughtfully at plans">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="py-20 bg-light-gray">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-black uppercase text-primary text-center mb-16 leading-tight">Why Choose Mohlomi Institute for PMP® Prep?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white border border-border-color rounded-lg p-8 text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-bullseye text-4xl text-primary mb-4"></i>
+                    <h5 class="text-xl font-semibold text-secondary mb-4">ECO-Aligned Structure</h5>
+                    <p class="text-gray-600 font-light leading-relaxed">Maps directly to the PMP® Exam Content Outline domains, tasks, and enablers – study what's actually tested.</p>
+                </div>
+                <div class="bg-white border border-border-color rounded-lg p-8 text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-brain text-4xl text-primary mb-4"></i>
+                    <h5 class="text-xl font-semibold text-secondary mb-4">Master the PMP® Mindset</h5>
+                    <p class="text-gray-600 font-light leading-relaxed">Learn the proactive, collaborative, value-driven approach essential for exam success and effective leadership.</p>
+                </div>
+                <div class="bg-white border border-border-color rounded-lg p-8 text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-user-friends text-4xl text-primary mb-4"></i>
+                    <h5 class="text-xl font-semibold text-secondary mb-4">Built for You</h5>
+                    <p class="text-gray-600 font-light leading-relaxed">Designed by a PMP® candidate facing the same challenges. Practical, affordable, and focused on first-time success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing-offers" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-black uppercase text-primary text-center mb-16 leading-tight">Ready to Achieve PMP® Success? Get Started Today!</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white border-2 border-primary rounded-2xl p-8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                    <div class="bg-primary text-white text-center py-4 -mx-8 -mt-8 mb-6 rounded-t-2xl">
+                        <h4 class="text-xl font-semibold">Complete Study Guide (PDF)</h4>
+                    </div>
+                    <p class="text-gray-600 font-light mb-6 leading-relaxed">Your comprehensive, 700+ page ECO-aligned text resource. Includes examples, activities, mindset focus, and practice questions. Perfect for self-paced study.</p>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-light text-secondary">$99.99</span>
+                        <span class="text-gray-500 font-light"> USD</span>
+                    </div>
+                    <a href="#" class="w-full bg-primary text-white py-3 px-6 rounded-2xl hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 font-light text-center block">
+                        <i class="fas fa-book-reader me-2"></i> Get the Guide Now
+                    </a>
+                </div>
+
+                <div class="bg-white border-2 border-success rounded-2xl p-8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-success text-white px-4 py-1 rounded-full text-sm font-medium">Recommended</span>
+                    </div>
+                    <div class="bg-success text-white text-center py-4 -mx-8 -mt-8 mb-6 rounded-t-2xl">
+                        <h4 class="text-xl font-semibold">Study Guide + Community</h4>
+                    </div>
+                    <p class="text-gray-600 font-light mb-6 leading-relaxed">Includes the Complete Study Guide (PDF) PLUS access to our supportive weekly study group for accountability, discussion, and shared resources.</p>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-light text-secondary">$149.99</span>
+                        <span class="text-gray-500 font-light"> USD</span>
+                    </div>
+                    <a href="#" class="w-full bg-success text-white py-3 px-6 rounded-2xl hover:bg-green-700 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 font-light text-center block">
+                        <i class="fas fa-users me-2"></i> Join the Group & Get Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section class="py-20 bg-light-gray">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-black uppercase text-primary mb-8 leading-tight">Your Guide: Bonzy Salesman, PMP®</h2>
+            <img src="http://localhost:8888/mi/wp-content/themes/understrap-child-1.2.0/images/1685529853437.jpeg" alt="Bonzy Salesman" class="w-32 h-32 rounded-full mx-auto mb-6 shadow-lg object-cover">
+            <p class="text-xl font-light italic text-secondary mb-6">"I couldn't afford the official prep books or courses, so I built my own guide — and now I'm sharing it with others on the same journey."</p>
+            <p class="text-lg font-light text-secondary leading-relaxed">Learn from Bonzy Salesman, a PMP® certified project leader and postgraduate with over 15 years of real-world experience. Bonzy created this guide providing the clear, practical, ECO-focused preparation needed for first-time exam success.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="mohlomi_institute_logo_black_to_white.png" alt="Mohlomi Institute" class="mb-4" style="width: 15rem;">
+                    <p class="text-gray-200 font-light">Mohlomi Institute provides focused, practical, and ethical training solutions for project management professionals aiming for excellence and certification success.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Home</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">PMP® Course</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">About Us</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Resources</h3>
+                    <ul class="space-y-2 text-gray-200 font-light">
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">PMP® Study Guide</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Free Sample</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">Testimonials</a></li>
+                        <li><a href="#" class="hover:text-white hover:underline transition-all duration-300">FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4 text-white uppercase text-sm">Connect</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-200 hover:text-white transition-colors duration-300"><i class="fab fa-twitter text-xl"></i></a>
+                    </div>
+                    <p class="text-gray-200 font-light text-sm"><i class="fas fa-envelope me-2"></i>info@mohlomiinstitute.com</p>
+                </div>
+            </div>
+            <hr class="border-white border-opacity-20 my-8">
+            <div class="text-center text-gray-200 font-light">
+                <div class="mb-2">
+                    <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a> |
+                    <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a> |
+                    <a href="#" class="hover:text-white transition-colors duration-300">Disclaimer</a>
+                </div>
+                <p>&copy; 2025 Mohlomi Institute. All Rights Reserved.</p>
+                <p class="text-sm mt-2">PMP®, PMBOK® are registered marks of the Project Management Institute, Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById('userDropdown').classList.toggle('hidden');
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            const button = event.target.closest('button');
+            if (!button || !button.onclick) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

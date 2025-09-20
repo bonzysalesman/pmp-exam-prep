@@ -1,0 +1,51 @@
+{
+  "name": "PMP Exam Prep Dashboard",
+  "short_name": "PMP Prep",
+  "description": "Complete PMP certification study dashboard with Work Groups and progress tracking",
+  "start_url": "/dashboard/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#5b28b3",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/images/pmp-exam-prep-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/pmp-exam-prep-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "lang": "en",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your learning progress",
+      "url": "/dashboard/",
+      "icons": [{ "src": "assets/images/pmp-exam-prep-logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Current Lesson",
+      "short_name": "Lesson",
+      "description": "Continue your current lesson",
+      "url": "/lesson/current/",
+      "icons": [{ "src": "assets/images/pmp-exam-prep-logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Practice Tests",
+      "short_name": "Tests",
+      "description": "Take practice tests",
+      "url": "/practice-test/",
+      "icons": [{ "src": "assets/images/pmp-exam-prep-logo.png", "sizes": "96x96" }]
+    }
+  ]
+}

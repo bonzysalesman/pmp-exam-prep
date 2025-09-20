@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WG1: Building A Team - PMP Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'rgb(91, 40, 179)',
+                        'primary-dark': 'rgb(71, 30, 139)',
+                        secondary: '#333',
+                        'light-gray': '#f5f5f5',
+                        'border-color': '#eaeaea',
+                        success: '#28a745'
+                    },
+                    fontFamily: {
+                        'source': ['Source Sans Pro', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <style>
+        p { line-height: 1.1618; }
+    </style>
+</head>
+<body class="bg-gray-50 font-source">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg flex flex-col">
+            <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200 flex-shrink-0">
+                <div class="flex items-center">
+                    <img src="pmp-exam-prep-logo.png" alt="PMP Exam Prep" class="w-20 h-auto">
+                    <span class="ml-3 text-lg font-semibold text-secondary">DASHBOARD</span>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto" style="background: #FFF;">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="bg-green-100 rounded-lg p-4 border-l-4 border-green-600">
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="text-sm font-semibold text-green-600">WG1: Building A Team</h4>
+                            <span class="text-xs text-green-600 font-medium">COMPLETED</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="bg-green-600 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600">All lessons completed</p>
+                    </div>
+                </div>
+
+                <nav class="mt-4">
+                    <div class="space-y-1">
+                        <a href="dashboard.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-tachometer-alt w-5 mr-3"></i>
+                            Dashboard
+                        </a>
+                        <a href="#" class="flex items-center px-6 py-3 text-sm font-medium text-primary bg-primary bg-opacity-10 border-r-2 border-primary">
+                            <i class="fas fa-users w-5 mr-3 text-green-600"></i>
+                            WG1: Building A Team
+                        </a>
+                        <a href="wg2-starting-project.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-rocket w-5 mr-3 text-blue-600"></i>
+                            WG2: Starting the Project
+                        </a>
+                        <a href="wg3-doing-work.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-cogs w-5 mr-3 text-blue-600"></i>
+                            WG3: Doing the Work
+                        </a>
+                        <a href="wg4-keeping-track.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-chart-line w-5 mr-3 text-green-600"></i>
+                            WG4: Keeping on Track
+                        </a>
+                        <a href="wg5-focus-business.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-building w-5 mr-3 text-orange-600"></i>
+                            WG5: Focus on Business
+                        </a>
+                        <a href="practice-tests.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-clipboard-check w-5 mr-3 text-purple-600"></i>
+                            Practice Tests
+                        </a>
+                        <a href="resources.html" class="flex items-center px-6 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50">
+                            <i class="fas fa-download w-5 mr-3"></i>
+                            Resources
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm border-b border-gray-200 flex-shrink-0">
+                <div class="flex items-center justify-between h-16 px-6">
+                    <div>
+                        <h1 class="text-xl font-semibold text-gray-900">WG1: Building A Team</h1>
+                        <p class="text-sm text-gray-500">People Domain - Weeks 2-3</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium">COMPLETED</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-6">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Lessons Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Build A Team</h3>
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Learn how to assemble effective project teams with the right skills and competencies.</p>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Define Team Ground Rules</h3>
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Establish clear expectations and working agreements for team collaboration.</p>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Negotiate Project Agreements</h3>
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Develop skills in negotiating agreements with stakeholders and team members.</p>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Empower Team Members</h3>
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Learn techniques to empower team members and stakeholders for better performance.</p>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Ensure Adequate Training</h3>
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Identify training needs and ensure team members have required competencies.</p>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Engage Virtual Teams</h3>
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Master strategies for effectively managing and engaging virtual team members.</p>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Address Impediments</h3>
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600 mb-4">Learn to identify and remove obstacles that block team progress.</p>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-eye mr-2"></i>Review Lesson
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Practice Test Section -->
+                    <div class="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">WG1 Practice Test</h3>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-600 mb-2">Test your knowledge of Building A Team concepts</p>
+                                <p class="text-sm text-green-600 font-medium">Score: 92% (Passed)</p>
+                            </div>
+                            <button class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-redo mr-2"></i>Retake Test
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
