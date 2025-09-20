@@ -203,6 +203,7 @@ require_once get_template_directory() . '/inc/api/content-api.php';
 require_once get_template_directory() . '/inc/practice-tests/test-engine.php';
 require_once get_template_directory() . '/inc/practice-tests/question-bank.php';
 require_once get_template_directory() . '/inc/practice-tests/results-analyzer.php';
+require_once get_template_directory() . '/inc/practice-tests/test-progress.php';
 require_once get_template_directory() . '/inc/api/test-api.php';
 
 // Update theme activation to include content management setup
@@ -256,3 +257,18 @@ function pmp_create_engagement_table() {
     dbDelta($sql);
 }
 add_action('after_switch_theme', 'pmp_create_engagement_table');
+// Add question manager admin page
+function pmp_add_question_manager_page() {
+    add_management_page(
+        'Question Manager',
+        'Question Manager',
+        'manage_options',
+        'question-manager',
+        'pmp_question_manager_page'
+    );
+}
+add_action('admin_menu', 'pmp_add_question_manager_page');
+
+function pmp_question_manager_page() {
+    include get_template_directory() . '/template-parts/admin/question-manager.php';
+}
