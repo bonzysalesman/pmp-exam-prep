@@ -267,10 +267,17 @@ class PMP_Search_Engine {
     public static function search_orderby_relevance($orderby) {
         global $wpdb;
         
+        $search_term = isset($_GET['s']) ? $_GET['s'] : '';
+        if (empty($search_term)) {
+            return $orderby;
+        }
+        
+        $search_term = esc_sql($search_term);
+        
         return "
             CASE 
-                WHEN {$wpdb->posts}.post_title LIKE '%{$_GET['s']}%' THEN 1
-                WHEN {$wpdb->posts}.post_content LIKE '%{$_GET['s']}%' THEN 2
+                WHEN {$wpdb->posts}.post_title LIKE '%{$search_term}%' THEN 1
+                WHEN {$wpdb->posts}.post_content LIKE '%{$search_term}%' THEN 2
                 ELSE 3
             END ASC,
             {$wpdb->posts}.post_date DESC
