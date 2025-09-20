@@ -203,3 +203,17 @@ function pmp_content_activation() {
     flush_rewrite_rules();
 }
 add_action('after_switch_theme', 'pmp_content_activation');
+// Include foundation test
+require_once get_template_directory() . '/test-foundation.php';
+
+// Add shortcode for quick testing
+function pmp_test_shortcode($atts) {
+    if (!current_user_can('manage_options')) {
+        return '<p>Access denied. Admin privileges required.</p>';
+    }
+    
+    ob_start();
+    pmp_test_foundation();
+    return ob_get_clean();
+}
+add_shortcode('pmp_test', 'pmp_test_shortcode');
