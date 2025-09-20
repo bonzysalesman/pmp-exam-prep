@@ -1,51 +1,156 @@
 {
-  "name": "PMP Exam Prep Dashboard",
+  "name": "PMP Exam Prep - Complete Certification Preparation",
   "short_name": "PMP Prep",
-  "description": "Complete PMP certification study dashboard with Work Groups and progress tracking",
-  "start_url": "/dashboard/",
+  "description": "Complete PMP certification preparation platform with lessons, practice tests, and progress tracking",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#5b28b3",
   "orientation": "portrait-primary",
+  "theme_color": "#3b82f6",
+  "background_color": "#ffffff",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "business"],
   "icons": [
     {
-      "src": "assets/images/pmp-exam-prep-logo.png",
+      "src": "/wp-content/themes/pmp-dashboard/assets/icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/images/pmp-exam-prep-logo.png",
+      "src": "/wp-content/themes/pmp-dashboard/assets/icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["education", "productivity"],
-  "lang": "en",
-  "scope": "/",
-  "prefer_related_applications": false,
+  "screenshots": [
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/screenshots/desktop-dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Dashboard view showing progress tracking and study analytics"
+    },
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/screenshots/mobile-lessons.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile lesson view with touch-optimized interface"
+    },
+    {
+      "src": "/wp-content/themes/pmp-dashboard/assets/screenshots/mobile-test.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Practice test interface with timer and progress"
+    }
+  ],
   "shortcuts": [
     {
-      "name": "Dashboard",
-      "short_name": "Dashboard",
-      "description": "View your learning progress",
-      "url": "/dashboard/",
-      "icons": [{ "src": "assets/images/pmp-exam-prep-logo.png", "sizes": "96x96" }]
+      "name": "Take Practice Test",
+      "short_name": "Practice Test",
+      "description": "Start a new PMP practice test",
+      "url": "/practice-tests",
+      "icons": [
+        {
+          "src": "/wp-content/themes/pmp-dashboard/assets/icons/shortcut-test.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     },
     {
-      "name": "Current Lesson",
-      "short_name": "Lesson",
-      "description": "Continue your current lesson",
-      "url": "/lesson/current/",
-      "icons": [{ "src": "assets/images/pmp-exam-prep-logo.png", "sizes": "96x96" }]
+      "name": "Study Lessons",
+      "short_name": "Lessons",
+      "description": "Continue with your lesson progress",
+      "url": "/lessons",
+      "icons": [
+        {
+          "src": "/wp-content/themes/pmp-dashboard/assets/icons/shortcut-lesson.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     },
     {
-      "name": "Practice Tests",
-      "short_name": "Tests",
-      "description": "Take practice tests",
-      "url": "/practice-test/",
-      "icons": [{ "src": "assets/images/pmp-exam-prep-logo.png", "sizes": "96x96" }]
+      "name": "View Progress",
+      "short_name": "Progress",
+      "description": "Check your study progress and analytics",
+      "url": "/dashboard",
+      "icons": [
+        {
+          "src": "/wp-content/themes/pmp-dashboard/assets/icons/shortcut-progress.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Download Resources",
+      "short_name": "Resources",
+      "description": "Access study materials and resources",
+      "url": "/resources",
+      "icons": [
+        {
+          "src": "/wp-content/themes/pmp-dashboard/assets/icons/shortcut-resources.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "handle_links": "preferred",
+  "protocol_handlers": [
+    {
+      "protocol": "web+pmpprep",
+      "url": "/deep-link?url=%s"
     }
   ]
 }
