@@ -58,6 +58,11 @@ add_action('wp_enqueue_scripts', 'pmp_enqueue_assets');
 
 // Include custom post types
 require_once get_template_directory() . '/inc/custom-post-types.php';
+
+// Include progress tracking system
+require_once get_template_directory() . '/inc/progress-database.php';
+require_once get_template_directory() . '/inc/progress-tracking.php';
+require_once get_template_directory() . '/inc/progress-api.php';
 require_once get_template_directory() . '/inc/user-progress.php';
 require_once get_template_directory() . '/inc/ajax-handlers.php';
 
