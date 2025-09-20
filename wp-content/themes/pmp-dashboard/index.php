@@ -117,21 +117,4 @@ get_header(); ?>
     </main>
 </div>
 
-<script>
-function toggleDropdown() {
-    document.getElementById('accountDropdown').classList.toggle('hidden');
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(event) {
-    const dropdown = document.getElementById('accountDropdown');
-    const button = event.target.closest('button');
-    if (!button || !button.contains(event.target)) {
-        if (dropdown && !dropdown.contains(event.target)) {
-            dropdown.classList.add('hidden');
-        }
-    }
-});
-</script>
-
 <?php get_footer(); ?>

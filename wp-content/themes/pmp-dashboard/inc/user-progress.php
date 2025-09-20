@@ -109,35 +109,62 @@ function pmp_get_user_progress($user_id) {
     $progress_table = $wpdb->prefix . 'user_lesson_progress';
     $sessions_table = $wpdb->prefix . 'study_sessions';
     
-    // Get lesson statistics
-    $lesson_stats = $wpdb->get_row($wpdb->prepare("
-        SELECT 
-            COUNT(*) as total_lessons,
-            SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed_lessons,
-            SUM(time_spent) as total_time_spent
-        FROM $progress_table 
-        WHERE user_id = %d
-    ", $user_id));
+    // Get lesson statistics - handle missing domain_type column
+    $column_exists = $wpdb->get_results("SHOW COLUMNS FROM $progress_table LIKE 'domain_type'");
+    
+    if (!empty($column_exists)) {
+        // New query with domain_type
+        $lesson_stats = $wpdb->get_row($wpdb->prepare("
+            SELECT 
+                COUNT(*) as total_lessons,
+                SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed_lessons,
+                SUM(time_spent) as total_time_spent
+            FROM $progress_table 
+            WHERE user_id = %d
+        ", $user_id));
+    } else {
+        // Fallback query without domain_type
+        $lesson_stats = $wpdb->get_row($wpdb->prepare("
+            SELECT 
+                COUNT(*) as total_lessons,
+                SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed_lessons,
+                SUM(time_spent) as total_time_spent
+            FROM $progress_table 
+            WHERE user_id = %d
+        ", $user_id));
+    }
     
     // Get study streak
     $study_streak = pmp_calculate_study_streak($user_id);
     
     // Get this week's study time
     $week_start = date('Y-m-d', strtotime('monday this week'));
-    $week_time = $wpdb->get_var($wpdb->prepare("
-        SELECT SUM(duration) 
-        FROM $sessions_table 
-        WHERE user_id = %d AND session_date >= %s
-    ", $user_id, $week_start));
+    
+    // Check if sessions table exists
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$sessions_table'");
+    $week_time = 0;
+    
+    if ($table_exists) {
+        $week_time = $wpdb->get_var($wpdb->prepare("
+            SELECT SUM(duration) 
+            FROM $sessions_table 
+            WHERE user_id = %d AND session_date >= %s
+        ", $user_id, $week_start));
+    }
+    
+    // Handle null values
+    $total_lessons = $lesson_stats ? (int) $lesson_stats->total_lessons : 0;
+    $completed_lessons = $lesson_stats ? (int) $lesson_stats->completed_lessons : 0;
+    $total_time_spent = $lesson_stats ? (int) $lesson_stats->total_time_spent : 0;
     
     return array(
-        'total_lessons' => (int) $lesson_stats->total_lessons,
-        'completed_lessons' => (int) $lesson_stats->completed_lessons,
-        'total_time_spent' => (int) $lesson_stats->total_time_spent,
+        'total_lessons' => $total_lessons,
+        'completed_lessons' => $completed_lessons,
+        'total_time_spent' => $total_time_spent,
         'study_streak' => $study_streak,
         'week_time' => round(($week_time ?: 0) / 3600, 1), // Convert to hours
-        'completion_percentage' => $lesson_stats->total_lessons > 0 ? 
-            round(($lesson_stats->completed_lessons / $lesson_stats->total_lessons) * 100) : 0
+        'completion_percentage' => $total_lessons > 0 ? 
+            round(($completed_lessons / $total_lessons) * 100) : 0
     );
 }
 
